@@ -1,3 +1,3 @@
 # fillit
 
-![alt text](fillit.pdf "Description goes here")
+![alt text](fillit.png "Description goes here")
