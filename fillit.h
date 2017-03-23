@@ -18,7 +18,9 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-# define BUF_SIZE 1024
+# define BUF_SIZE 550
 
+int	open_file(char *file);
+int	read_file(int fd, char *buf);
 
 #endif
