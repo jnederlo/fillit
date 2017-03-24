@@ -6,7 +6,8 @@ To complete the task we are allowed to use the exit, open, close, write, read, m
 
 Specifically, our executable must take as a parameter one (and only one) file which contains a list of Tetriminos to arrange. Every Tetriminos will consist of 4 lines and each Tetriminos is seperated by an empty line.
 
-A few examples of valid descriptions of Tetriminos :
+A few examples of valid descriptions of Tetriminos:
+
 .... .... #### .... .##. .... .#.. .... ....
 ..## .... .... .... ..## .##. ###. ##.. .##.
 ..#. ..## .... ##.. .... ##.. .... #... ..#.
