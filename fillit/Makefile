@@ -1,6 +1,6 @@
 
 
-NAME			=	fillit.a
+NAME			=	fillit
 CC				=	gcc
 FLAGS			=	-c -Wall -Werror -Wextra
 // LIBS			=	-static -llibft
