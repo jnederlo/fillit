@@ -1,19 +1,22 @@
 
 
 NAME			=	fillit
+LIBFT			=	libft
 CC				=	gcc
-FLAGS			=	-c -Wall -Werror -Wextra
-// LIBS			=	-static -llibft
+FLAGS			=	-Wall -Werror -Wextra
+LIBS			=	./libft/libft.a
 HEADER			=	fillit.h
 FILES			=	open_file.c \
 
 OBJECTS			=	$(FILES:%.c=%.o)
 
-all:	$(NAME)
+all:	$(LIBFT) $(NAME)
 
-$(NAME): $(OBJECTS)
-	$(CC) $(FLAGS) $(FILES) $(LIBS) 
+$(LIBFT):
+	make -C ./libft
 
+$(NAME):
+	$(CC) $(FLAGS) $(FILES) $(LIBS)
 
 clean:
 	rm -f $(OBJECTS)
