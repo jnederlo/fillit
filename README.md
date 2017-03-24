@@ -8,7 +8,7 @@ Specifically, our executable must take as a parameter one (and only one) file wh
 
 A few examples of valid descriptions of Tetriminos:
 
-![alt text](samples/samples_tetriminos.png)
+![alt text](https://github.com/jnederlo/fillit/blob/master/samples/sample_tetriminos.png)
 
 In this problem we cannot rotate the tetriminos, and among the different solutions possible, we must make the smallest square possible where the Tetriminos are placed in their most upper-left position (in the order as they appear in the file).
 
