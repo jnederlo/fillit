@@ -34,7 +34,7 @@ OBJECTS		=	$(FILES:%.c=%.o)
 
 all:	$(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME):
 	$(CC) $(FLAGS) $(FILES)
 	ar rcs $(NAME) $(OBJECTS)
 
