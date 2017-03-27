@@ -1,7 +1,8 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_chk.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +11,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** BUF_SIZE is defined in the header as 1024.
-*/
-
 #include "fillit.h"
 
-int	main(int argc, char **argv)
+int	error_chk(int error_val)
 {
-	char	*file;
-	int		fd;
-	char	*buf;
-	int		bytes_read;
-	int		close_return;
-
-	if (argc != 2)
-		return (0);
-	file = argv[1];
-	fd = open_file(file);
-	if (error_chk(fd) == 1)
-		return (0);
-	buf = ft_strnew(BUF_SIZE);
-	bytes_read = read_file(fd, buf);
-	if (error_chk(bytes_read) == 1)
-		return (0);
-	while (*buf)
+	if (error_val == -1)
 	{
-		write (1, buf, 1);
-		buf++;
+		ft_putstr("error\n");
+		return (1);
 	}
-	close_return = close(fd);
-	if (error_chk(close_return) == 1)
-		return (0);
 	return (0);
 }

@@ -21,7 +21,8 @@
 
 # define BUF_SIZE 550
 
-int	open_file(char *file);
-int	read_file(int fd, char *buf);
+int		open_file(char *file);
+int		read_file(int fd, char *buf);
+int		error_chk(int error_val);
 
 #endif
