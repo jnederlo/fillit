@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	bytes_read = read_file(fd, buf);
 	if (error_chk(bytes_read) == 1)
 		return (0);
-	while (*buf)
+	while (*buf)//THIS PART WILL GET REMOVED FROM HERE
 	{
 		write (1, buf, 1);
 		buf++;
