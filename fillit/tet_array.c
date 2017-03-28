@@ -25,30 +25,30 @@ piece	**tet_array(char *buf)
 piece	*tet_piece(char *buf)
 {
 	int		i;
-	int		k;
+	int		column;
 	piece	*tetrimino;
 	int		row;
 
 	i = 0;
-	k = 0;
+	column = 0;
 	row = 1;
 	while (i < 20)
 	{
 		if (buf[i] == '\n')
 		{
-			k = 0;
+			column = 0;
 			i++;
 		}
 		if (buf[i] == '.')
 		{
 			i++;
-			k++;
+			column++;
 		}
 		else if (buf[i] == '#')
 		{
-			tetrimino.pos_1 = {row, k};
+			tetrimino.pos_1 = {row, column};
 			i++;
-			k++;
+			column++;
 		}
 	}
 	return (tetrimino);
