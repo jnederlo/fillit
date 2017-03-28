@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// need to compile with ft_putstr.c, ft_putchar.c, ft_strnew.c, ft_bzero.c
-// BUF_SIZE is defined in the header as 1024.
+/*
+** BUF_SIZE is defined in the header as 1024.
+*/
 
 #include "fillit.h"
 
@@ -27,28 +28,19 @@ int	main(int argc, char **argv)
 		return (0);
 	file = argv[1];
 	fd = open_file(file);
-	if (fd == -1)
-	{
-		ft_putstr("error\n");
+	if (error_chk(fd) == 1)
 		return (0);
-	}
 	buf = ft_strnew(BUF_SIZE);
 	bytes_read = read_file(fd, buf);
-	if (bytes_read == -1)
-	{
-		ft_putstr("error\n");
+	if (error_chk(bytes_read) == 1)
 		return (0);
-	}
-	while (*buf)
+	while (*buf)//THIS PART WILL GET REMOVED FROM HERE
 	{
 		write (1, buf, 1);
 		buf++;
 	}
 	close_return = close(fd);
-	if (close_return == -1)
-	{
-		ft_putstr("File Did Not Close\n");
+	if (error_chk(close_return) == 1)
 		return (0);
-	}
 	return (0);
 }

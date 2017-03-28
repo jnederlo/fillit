@@ -6,7 +6,7 @@ CC				=	gcc
 FLAGS			=	-Wall -Werror -Wextra -o
 LIBS			=	./libft/libft.a
 HEADER			=	fillit.h
-FILES			=	open_file.c read_file.c main.c \
+FILES			=	open_file.c read_file.c main.c error_chk.c tet_array.c \
 
 OBJECTS			=	$(FILES:%.c=%.o)
 
