@@ -18,10 +18,29 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "./libft/libft.h"
+# include <stdlib.h>
 
 # define BUF_SIZE 550
 
-int	open_file(char *file);
-int	read_file(int fd, char *buf);
+typedef struct point	
+
+typedef struct		s_tetrimino
+{
+	coord	pos_1;
+	coord	pos_2;
+	coord	pos_3;
+	coord	pos_4;
+}					piece;
+
+typedef struct		s_coord
+{
+	int	x = 0;
+	int	y = 0;
+}					coord;
+
+int					open_file(char *file);
+int					read_file(int fd, char *buf);
+int					error_chk(int error_val);
+piece				**tet_array(char *buf);
 
 #endif
