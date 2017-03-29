@@ -12,7 +12,7 @@ void	test_print(slider *total)
 	while (size--)
 	{
 		j = 0;
-		printf( BOLDRED "\nPiece %i:\n\n" RESET , i + 1);
+		printf( BOLDCYAN "\nPiece %i:\n\n" RESET , i + 1);
 		printf( BLUE "COLUMN		ROW\n" RESET );
 		printf( BLUE "---------------------\n" RESET);
 		while (j < 4)

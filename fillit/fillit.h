@@ -25,6 +25,7 @@
 # define BLUE	"\033[34m"
 # define GREEN	"\033[32m"
 # define BOLDRED	"\033[1m\033[31m"
+# define BOLDCYAN    "\033[1m\033[36m"
 
 typedef struct		s_coord
 {
