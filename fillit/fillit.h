@@ -22,14 +22,14 @@
 
 # define BUF_SIZE 550
 
-typedef struct point	
+typedef struct		point
 
 typedef struct		s_tetrimino
 {
-	coord	pos_1;
-	coord	pos_2;
-	coord	pos_3;
-	coord	pos_4;
+	coord	*pos_1;
+	coord	*pos_2;
+	coord	*pos_3;
+	coord	*pos_4;
 }					piece;
 
 typedef struct		s_coord

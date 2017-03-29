@@ -28,17 +28,14 @@ piece	*tet_piece(char *buf)
 	int		column;
 	piece	*tetrimino;
 	int		row;
+	int		piece_coord;
 
 	i = 0;
 	column = 0;
 	row = 1;
+	piece_coord = 0;
 	while (i < 20)
 	{
-		if (buf[i] == '\n')
-		{
-			column = 0;
-			i++;
-		}
 		if (buf[i] == '.')
 		{
 			i++;
@@ -46,9 +43,16 @@ piece	*tet_piece(char *buf)
 		}
 		else if (buf[i] == '#')
 		{
-			tetrimino.pos_1 = {row, column};
+			piece_coord++;// Does This Work??
+			tetrimino.member[piece_coord] = {row, column};//don't know what member would be
 			i++;
 			column++;
+		}
+		else if (buf[i] == '\n')
+		{
+			column = 0;
+			i++;
+			row++;
 		}
 	}
 	return (tetrimino);
@@ -72,7 +76,7 @@ int		count_pieces(char *buf)
 	while (error)
 	{
 		// ERROR CHECK TO VERIFY PIECE
-		buf += 21;
+		buf += 21;// I think this should be 20 b/c buff starts at 0??
 		if (*buf == '\n')
 			count++;
 		else if (*buf == '\0')
