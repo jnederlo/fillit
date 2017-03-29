@@ -15,7 +15,6 @@
 int	read_file(int fd, char *buf)
 {
 	int	read_bytes;
-
 	read_bytes = read(fd, buf, BUF_SIZE);
 	return (read_bytes);
 }

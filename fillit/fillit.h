@@ -22,25 +22,30 @@
 
 # define BUF_SIZE 550
 
-typedef struct		point
+typedef struct		s_coord
+{
+	int	x;
+	int	y;
+}					coord;
 
 typedef struct		s_tetrimino
 {
-	coord	*pos_1;
-	coord	*pos_2;
-	coord	*pos_3;
-	coord	*pos_4;
+	coord pos[4];
 }					piece;
 
-typedef struct		s_coord
+typedef struct		s_tetarray
 {
-	int	x = 0;
-	int	y = 0;
-}					coord;
+	piece	**piece_array;
+	int		size;
+}					slider;
 
 int					open_file(char *file);
 int					read_file(int fd, char *buf);
 int					error_chk(int error_val);
-piece				**tet_array(char *buf);
+slider				*tet_array(char *buf);
+void				test_print(slider *total);
+int					count_pieces(char *buf);
+piece				*tet_piece(char *buf);
+piece				*piece_init(piece *tetrimino);
 
 #endif

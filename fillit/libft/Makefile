@@ -32,7 +32,7 @@ FILES		=	ft_atoi.c ft_strcat.c ft_strncat.c ft_strcmp.c ft_strncmp.c \
 
 OBJECTS		=	$(FILES:%.c=%.o)
 
-all:	$(NAME)
+all:	$(NAME) clean
 
 $(NAME):
 	$(CC) $(FLAGS) $(FILES)

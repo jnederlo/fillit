@@ -11,15 +11,28 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
-piece	**tet_array(char *buf)
+slider	*tet_array(char *buf)
 {
+	slider			*total;
 	piece			**piece_array;
-	unsigned int	size_array;
+	piece			**head;
+	int				size_array;
 
 	size_array = count_pieces(buf);
+	printf ("RETURN\n");
+	total = (slider *)malloc(sizeof(slider));
+	total->size = size_array;
 	piece_array = (piece **)malloc(sizeof(piece *) * size_array);
-	return (piece_array);
+	head = piece_array;
+	while (size_array--)
+	{
+		*piece_array = tet_piece(buf); //NEED TO MOVE BUF TO THE NEXT PIECE
+		piece_array++;
+	}
+	total->piece_array = head;
+	return (total);
 }
 
 piece	*tet_piece(char *buf)
@@ -28,13 +41,15 @@ piece	*tet_piece(char *buf)
 	int		column;
 	piece	*tetrimino;
 	int		row;
-	int		piece_coord;
+	int		j;
 
 	i = 0;
-	column = 0;
+	column = 1;
 	row = 1;
-	piece_coord = 0;
-	while (i < 20)
+	j = 0;
+	tetrimino = (piece *)malloc(sizeof(piece));
+	tetrimino = piece_init(tetrimino);
+	while (i < 19)
 	{
 		if (buf[i] == '.')
 		{
@@ -43,14 +58,15 @@ piece	*tet_piece(char *buf)
 		}
 		else if (buf[i] == '#')
 		{
-			piece_coord++;// Does This Work??
-			tetrimino.member[piece_coord] = {row, column};//don't know what member would be
+			tetrimino->pos[j].x = row;
+			tetrimino->pos[j].y = column;
+			j++;
 			i++;
 			column++;
 		}
 		else if (buf[i] == '\n')
 		{
-			column = 0;
+			column = 1;
 			i++;
 			row++;
 		}
@@ -58,11 +74,19 @@ piece	*tet_piece(char *buf)
 	return (tetrimino);
 }
 
-
-piece	*bit_init(piece *tetrimino)
+piece	*piece_init(piece *tetrimino)
 {
-	tetrimino = (piece *)malloc(sizeof(peice));
-	ft_bzero(tetrimino, sizeof(piece));
+	coord	xy;
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		xy.x = 0;
+		xy.y = 0;
+		tetrimino->pos[i] = xy;
+		i++;
+	}
 	return (tetrimino);
 }
 
@@ -75,11 +99,14 @@ int		count_pieces(char *buf)
 	error = 1;
 	while (error)
 	{
+//		printf("count: %i\n", count);
+//		printf("buf: %s\n", buf);
 		// ERROR CHECK TO VERIFY PIECE
-		buf += 21;// I think this should be 20 b/c buff starts at 0??
+		buf += 19;// I think this should be 20 b/c buff starts at 0??
+//		printf(buf);
 		if (*buf == '\n')
 			count++;
-		else if (*buf == '\0')
+		if (*buf == '\0')
 		{
 			count++;
 			return (count);

@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	char	*buf;
 	int		bytes_read;
 	int		close_return;
+	slider	*total;
 
 	if (argc != 2)
 		return (0);
@@ -34,11 +35,8 @@ int	main(int argc, char **argv)
 	bytes_read = read_file(fd, buf);
 	if (error_chk(bytes_read) == 1)
 		return (0);
-	while (*buf)//THIS PART WILL GET REMOVED FROM HERE
-	{
-		write (1, buf, 1);
-		buf++;
-	}
+	total = tet_array(buf);
+	test_print(total);
 	close_return = close(fd);
 	if (error_chk(close_return) == 1)
 		return (0);
