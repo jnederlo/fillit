@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 slider	*tet_array(char *buf)
 {
@@ -21,15 +20,19 @@ slider	*tet_array(char *buf)
 	int				size_array;
 
 	size_array = count_pieces(buf);
-	printf ("RETURN\n");
 	total = (slider *)malloc(sizeof(slider));
+	if (!total)
+		return (0);
 	total->size = size_array;
 	piece_array = (piece **)malloc(sizeof(piece *) * size_array);
+	if (!piece_array)
+		return (0);
 	head = piece_array;
 	while (size_array--)
 	{
-		*piece_array = tet_piece(buf); //NEED TO MOVE BUF TO THE NEXT PIECE
+		*piece_array = tet_piece(buf);
 		piece_array++;
+		buf += 21;
 	}
 	total->piece_array = head;
 	return (total);
@@ -38,38 +41,43 @@ slider	*tet_array(char *buf)
 piece	*tet_piece(char *buf)
 {
 	int		i;
-	int		column;
-	piece	*tetrimino;
-	int		row;
 	int		j;
+	piece	*tetrimino;
 
 	i = 0;
-	column = 1;
-	row = 1;
 	j = 0;
 	tetrimino = (piece *)malloc(sizeof(piece));
+	if (!tetrimino)
+		return (0);
 	tetrimino = piece_init(tetrimino);
+	tetrimino = piece_set(tetrimino, buf, i, j);
+	return (tetrimino);
+}
+
+piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
+{
+	int		column;
+	int		row;
+
+	column = 1;
+	row = 1;
 	while (i < 19)
 	{
 		if (buf[i] == '.')
-		{
-			i++;
 			column++;
-		}
 		else if (buf[i] == '#')
 		{
-			tetrimino->pos[j].x = row;
-			tetrimino->pos[j].y = column;
+			tetrimino->pos[j].x = column;
+			tetrimino->pos[j].y = row;
 			j++;
-			i++;
 			column++;
 		}
 		else if (buf[i] == '\n')
 		{
 			column = 1;
-			i++;
 			row++;
 		}
+		i++;		
 	}
 	return (tetrimino);
 }
@@ -99,14 +107,14 @@ int		count_pieces(char *buf)
 	error = 1;
 	while (error)
 	{
-//		printf("count: %i\n", count);
-//		printf("buf: %s\n", buf);
 		// ERROR CHECK TO VERIFY PIECE
-		buf += 19;// I think this should be 20 b/c buff starts at 0??
-//		printf(buf);
+		buf += 19;
 		if (*buf == '\n')
+		{
 			count++;
-		if (*buf == '\0')
+			buf += 2;
+		}
+		else if (*buf == '\0')
 		{
 			count++;
 			return (count);

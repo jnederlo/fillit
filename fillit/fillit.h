@@ -21,6 +21,10 @@
 # include <stdlib.h>
 
 # define BUF_SIZE 550
+# define RESET	"\033[0m"
+# define BLUE	"\033[34m"
+# define GREEN	"\033[32m"
+# define BOLDRED	"\033[1m\033[31m"
 
 typedef struct		s_coord
 {
@@ -47,5 +51,6 @@ void				test_print(slider *total);
 int					count_pieces(char *buf);
 piece				*tet_piece(char *buf);
 piece				*piece_init(piece *tetrimino);
+piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 
 #endif

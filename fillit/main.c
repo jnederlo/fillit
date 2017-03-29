@@ -36,6 +36,7 @@ int	main(int argc, char **argv)
 	if (error_chk(bytes_read) == 1)
 		return (0);
 	total = tet_array(buf);
+	free(buf);
 	test_print(total);
 	close_return = close(fd);
 	if (error_chk(close_return) == 1)
