@@ -71,13 +71,13 @@ int	valid_chk(char *buf)
 
 	pos = 0;
 	hashtag = 0;
-	while (pos < 19)
+	while (pos < 18)
 	{
 		column = 0;
 		while (column < 4)
 		{
-			if (!(buf[pos] == '.') || !(buf[pos] == '#'))
-				return (1);
+			if (!(buf[pos] == '.' || buf[pos] == '#'))
+				return (-1);
 			if (buf[pos] == '#')
 				hashtag++;
 			column++;
@@ -85,7 +85,7 @@ int	valid_chk(char *buf)
 		}
 		pos++;
 	}
-	if (hashtag > 4)
-		return (1);
+	if (hashtag != 4)
+		return (-1);
 	return (0);
 }

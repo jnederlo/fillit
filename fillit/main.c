@@ -14,7 +14,6 @@
 ** BUF_SIZE is defined in the header as 1024.
 */
 
-#include <stdio.h>
 #include "fillit.h"
 
 int	main(int argc, char **argv)
@@ -38,7 +37,6 @@ int	main(int argc, char **argv)
 		return (0);
 	if (error_chk(buf_chk(buf)) == -1)
 		return (0);
-	printf ("AFTER BUF_CHK\n");
 	total = tet_array(buf);
 	if (total == NULL)
 	{
