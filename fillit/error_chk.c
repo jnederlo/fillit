@@ -13,6 +13,16 @@
 
 #include "fillit.h"
 
+int usage(int argc)
+{
+	if (argc != 2)
+	{
+		ft_putstr("usage: ./fillit target_file\n");
+		return (-1);
+	}
+	return (0);
+}
+
 int	error_chk(int error_val)
 {
 	if (error_val == -1)
