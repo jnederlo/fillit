@@ -35,3 +35,8 @@ int	smallest_square(slider *total)
 		smallest = 6;
 	return (smallest);
 }
+
+//int	check_map()
+//{
+//
+//}
