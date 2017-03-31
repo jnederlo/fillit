@@ -14,6 +14,7 @@
 ** BUF_SIZE is defined in the header as 1024.
 */
 
+#include <stdio.h>
 #include "fillit.h"
 
 int	main(int argc, char **argv)
@@ -29,17 +30,25 @@ int	main(int argc, char **argv)
 		return (0);
 	file = argv[1];
 	fd = open_file(file);
-	if (error_chk(fd) == 1)
+	if (error_chk(fd) == -1)
 		return (0);
 	buf = ft_strnew(BUF_SIZE);
 	bytes_read = read_file(fd, buf);
-	if (error_chk(bytes_read) == 1)
+	if (error_chk(bytes_read) == -1)
 		return (0);
+	if (error_chk(buf_chk(buf)) == -1)
+		return (0);
+	printf ("AFTER BUF_CHK\n");
 	total = tet_array(buf);
+	if (total == NULL)
+	{
+		ft_putstr("error\n");
+		return (-1);
+	}
 	free(buf);
 	test_print(total);
 	close_return = close(fd);
-	if (error_chk(close_return) == 1)
+	if (error_chk(close_return) == -1)
 		return (0);
 	return (0);
 }

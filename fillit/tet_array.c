@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 slider	*tet_array(char *buf)
 {
@@ -20,6 +21,8 @@ slider	*tet_array(char *buf)
 	int				size_array;
 
 	size_array = count_pieces(buf);
+	if (size_array == -1) // CAN RETURN -1 ON ERROR THEN RETURN
+		return (NULL);
 	total = (slider *)malloc(sizeof(slider));
 	if (!total)
 		return (0);
@@ -77,7 +80,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			column = 1;
 			row++;
 		}
-		i++;		
+		i++;
 	}
 	return (tetrimino);
 }
@@ -107,7 +110,8 @@ int		count_pieces(char *buf)
 	error = 1;
 	while (error)
 	{
-		// ERROR CHECK TO VERIFY PIECE
+		if ((error = valid_chk(buf)) == 1)
+			return (-1);
 		buf += 19;
 		if (*buf == '\n')
 		{
@@ -120,5 +124,5 @@ int		count_pieces(char *buf)
 			return (count);
 		}
 	}
-	return (-1); // RETURN ON ERROR
+	return (-1);
 }
