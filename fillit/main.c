@@ -18,22 +18,17 @@
 
 int	main(int argc, char **argv)
 {
-	char	*file;
 	int		fd;
 	char	*buf;
-	int		bytes_read;
-	int		close_return;
 	slider	*total;
 
-	if (argc != 2)
-		return (0);
-	file = argv[1];
-	fd = open_file(file);
+	if (usage(argc) == -1)
+		return (-1);
+	fd = open_file(argv[1]);
 	if (error_chk(fd) == -1)
 		return (0);
 	buf = ft_strnew(BUF_SIZE);
-	bytes_read = read_file(fd, buf);
-	if (error_chk(bytes_read) == -1)
+	if (error_chk(read_file(fd, buf)) == -1)
 		return (0);
 	if (error_chk(buf_chk(buf)) == -1)
 		return (0);
@@ -44,9 +39,8 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	free(buf);
-	test_print(total);
-	close_return = close(fd);
-	if (error_chk(close_return) == -1)
+	test_print(total);	// OUR ACTUAL PRINT FUNCTION CALL WILL GO HERE
+	if (error_chk(close(fd)) == -1)
 		return (0);
 	return (0);
 }
