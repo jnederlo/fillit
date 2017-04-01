@@ -35,7 +35,7 @@ typedef struct		s_coord
 
 typedef struct		s_tetrimino
 {
-	coord pos[4];
+	coord	pos[4];
 }					piece;
 
 typedef struct		s_tetarray
@@ -55,5 +55,7 @@ piece				*piece_init(piece *tetrimino);
 piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 int					buf_chk(char *buf);
 int					valid_chk(char *buf);
+int					usage(int argc);
+int					smallest_square(slider *total)
 
 #endif
