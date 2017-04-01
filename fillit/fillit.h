@@ -57,6 +57,6 @@ int					buf_chk(char *buf);
 int					valid_chk(char *buf);
 int					usage(int argc);
 int					smallest_square(slider *total);
-int					newlines(char *buf, int nb_newlines);
+int					newline(char *buf, int nb_newlines);
 
 #endif

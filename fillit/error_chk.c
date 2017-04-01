@@ -52,14 +52,13 @@ int	buf_chk(char *buf)
 					return (-1);
 				buf++;
 			}
-			if (*buf == '\n')
-				nb_newlines++;
+			if (*buf == '\n' ? nb_newlines = newline(buf, nb_newlines) : 0);
 			else if (*buf)
 				return (-1);
 			buf++;
 			row++;
 		}
-		nb_newlines = newlines(buf, nb_newlines);
+		nb_newlines = newline(buf, nb_newlines);
 		if (*buf == '\0')
 			return nb_newlines < 130 ? 1 : -1;
 		buf++;
@@ -67,7 +66,7 @@ int	buf_chk(char *buf)
 	return (-1);
 }
 
-int	newlines(char *buf, int nb_newlines)
+int	newline(char *buf, int nb_newlines)
 {
 	if (*buf == '\n')
 		nb_newlines++;
