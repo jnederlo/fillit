@@ -58,5 +58,6 @@ int					valid_chk(char *buf);
 int					usage(int argc);
 int					smallest_square(slider *total);
 int					newline(char *buf, int nb_newlines);
+int					in_contact(piece *tetriminio);
 
 #endif

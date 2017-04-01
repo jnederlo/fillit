@@ -33,6 +33,19 @@ int	error_chk(int error_val)
 	return (0);
 }
 
+int	in_contact(piece *tetrimino)
+{
+/*
+	int	i;
+
+	i = 1;
+	while (*tetrimino)
+	{
+		if (tetrimino->pos[i])
+*/
+}
+
+
 int	buf_chk(char *buf)
 {
 	int	pos;

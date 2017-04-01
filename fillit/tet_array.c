@@ -81,6 +81,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		}
 		i++;
 	}
+	// Is this where our last error check goes -> each block in contact on 4 sides?
 	return (tetrimino);
 }
 
