@@ -45,13 +45,12 @@ int	buf_chk(char *buf)
 		row = 1;
 		while (row < 5)
 		{
-			pos = 0;
-			while (pos < 4)
+			pos = -1;
+			while (pos++ < 3)
 			{
 				if (!(*buf == '.' || *buf == '#'))
 					return (-1);
 				buf++;
-				pos++;
 			}
 			if (*buf == '\n')
 				nb_newlines++;
@@ -60,17 +59,19 @@ int	buf_chk(char *buf)
 			buf++;
 			row++;
 		}
-		if (*buf == '\n')
-			nb_newlines++;
-		else if (*buf == '\0')
-		{
-			if (nb_newlines < 130)
-				return (1);
-			return (-1);
-		}
+		nb_newlines = newlines(buf, nb_newlines);
+		if (*buf == '\0')
+			return nb_newlines < 130 ? 1 : -1;
 		buf++;
 	}
 	return (-1);
+}
+
+int	newlines(char *buf, int nb_newlines)
+{
+	if (*buf == '\n')
+		nb_newlines++;
+	return (nb_newlines);
 }
 
 int	valid_chk(char *buf)

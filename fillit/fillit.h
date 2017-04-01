@@ -56,6 +56,7 @@ piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 int					buf_chk(char *buf);
 int					valid_chk(char *buf);
 int					usage(int argc);
-int					smallest_square(slider *total)
+int					smallest_square(slider *total);
+int					newlines(char *buf, int nb_newlines);
 
 #endif
