@@ -33,18 +33,27 @@ int	error_chk(int error_val)
 	return (0);
 }
 
+// ADDED THIS FUNCTION HERE
 int	in_contact(piece *tetrimino)
 {
-/*
 	int	i;
+	int	pos;
 
 	i = 1;
-	while (*tetrimino)
+	pos = 1;
+	while (pos < 5)
 	{
-		if (tetrimino->pos[i])
-*/
+		if (tetrimino->pos[i].x == tetrimino->pos[i].x + 1
+			|| tetrimino->pos[i].y == tetrimino->pos[i].y +1
+			|| tetrimino->pos[i].y == tetrimino->pos[i].y - 1)
+			return (0);
+		else 
+			return (-1);
+		pos++;
+		i++;
+	}
+	return (0);
 }
-
 
 int	buf_chk(char *buf)
 {

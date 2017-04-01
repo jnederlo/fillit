@@ -53,6 +53,11 @@ piece	*tet_piece(char *buf)
 		return (0);
 	tetrimino = piece_init(tetrimino);
 	tetrimino = piece_set(tetrimino, buf, i, j);
+	// ADDED THIS RETURN HERE
+	/*
+	if (tetrimino == 0)
+		return (0);
+	*/
 	return (tetrimino);
 }
 
@@ -81,7 +86,11 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		}
 		i++;
 	}
-	// Is this where our last error check goes -> each block in contact on 4 sides?
+	// ADDED in_contact ERROR CHECK HERE
+	/*
+	if (in_contact(tetrimino) == -1)
+		return (0);
+	*/
 	return (tetrimino);
 }
 
