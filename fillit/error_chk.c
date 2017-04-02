@@ -37,20 +37,16 @@ int	error_chk(int error_val)
 int	in_contact(piece *tetrimino)
 {
 	int	i;
-	int	pos;
 
-	i = 1;
-	pos = 1;
-	while (pos < 5)
+	i = 0;
+	while (i < 3)
 	{
-		if (tetrimino->pos[i].x == tetrimino->pos[i].x + 1
-			|| tetrimino->pos[i].y == tetrimino->pos[i].y +1
-			|| tetrimino->pos[i].y == tetrimino->pos[i].y - 1)
-			return (0);
+		if (tetrimino->pos[i + 1].x == tetrimino->pos[i].x + 1
+			|| tetrimino->pos[i + 1].x == tetrimino->pos[i].x - 1
+			|| tetrimino->pos[i + 1].y == tetrimino->pos[i].y + 1)
+			i++;
 		else 
 			return (-1);
-		pos++;
-		i++;
 	}
 	return (0);
 }
