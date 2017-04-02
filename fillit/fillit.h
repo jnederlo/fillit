@@ -44,6 +44,17 @@ typedef struct		s_tetarray
 	int		size;
 }					slider;
 
+typedef struct		s_pos 	// A POSITION ON THE GRID
+{
+	char pos;
+}					grip_pos;
+
+typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
+{
+	int			dimension;
+	grip_pos	**pos;
+}					grid;
+
 int					open_file(char *file);
 int					read_file(int fd, char *buf);
 int					error_chk(int error_val);
@@ -59,5 +70,7 @@ int					usage(int argc);
 int					smallest_square(slider *total);
 int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
+grid				grid_init(int smallest);
+int					check_map(grid *current_grid);
 
 #endif

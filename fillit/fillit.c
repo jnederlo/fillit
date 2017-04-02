@@ -40,3 +40,8 @@ int	smallest_square(slider *total)
 //{
 //
 //}
+
+grid	*grid_init(int smallest)
+{
+
+}
