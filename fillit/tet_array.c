@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 slider	*tet_array(char *buf)
 {
@@ -33,6 +34,11 @@ slider	*tet_array(char *buf)
 	while (size_array--)
 	{
 		*piece_array = tet_piece(buf);
+		// ADDED THIS RETURN HERE
+		///*
+		if (*piece_array == 0)
+			return (0);
+		//*/
 		piece_array++;
 		buf += 21;
 	}
@@ -54,10 +60,10 @@ piece	*tet_piece(char *buf)
 	tetrimino = piece_init(tetrimino);
 	tetrimino = piece_set(tetrimino, buf, i, j);
 	// ADDED THIS RETURN HERE
-	/*
+	///*
 	if (tetrimino == 0)
 		return (0);
-	*/
+	//*/
 	return (tetrimino);
 }
 
@@ -79,6 +85,10 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			j++;
 			column++;
 		}
+		// ADDING IN ROW = 1 HERE;
+		else if (buf[i] == '\n' && !(buf[i - 1] == '#' 
+				|| buf[i - 2] == '#' || buf[i - 3] == '#'))
+				column = 1;
 		else if (buf[i] == '\n')
 		{
 			column = 1;
@@ -87,10 +97,14 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		i++;
 	}
 	// ADDED in_contact ERROR CHECK HERE
-	/*
+	///*
 	if (in_contact(tetrimino) == -1)
+	{
+		printf("in_contact is returning: %i\n", in_contact(tetrimino));
 		return (0);
-	*/
+	}
+	//*/
+	
 	return (tetrimino);
 }
 
