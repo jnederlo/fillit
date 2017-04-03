@@ -1,8 +1,7 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_chk.c                                        :+:      :+:    :+:   */
+/*   error_chk_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,6 +9,16 @@
 /*   Updated: 2017/03/22 19:17:00 by jnederlo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*
+** This file includes the error checking found in main.c:
+**
+**		- error_chk() to generically return "error".
+**		- usage() to display usage if # args is not 2.
+**		- buf_chk() checks that every tet is 4 lines of 4 char,
+**					that each tet is seperated by a \n,
+**					and that each file has a max of 26 tet and a min of 1.
+*/
 
 #include "fillit.h"
 
@@ -31,23 +40,6 @@ int	error_chk(int error_val)
 		return (-1);
 	}
 	return (0);
-}
-
-int	in_contact(piece *tetrimino)
-{
-	if ((shape_1(tetrimino) == 1) || (shape_2(tetrimino) == 1) ||
-		(shape_3(tetrimino) == 1) || (shape_4(tetrimino) == 1) ||
-		(shape_5(tetrimino) == 1) || (shape_6(tetrimino) == 1) ||
-		(shape_7(tetrimino) == 1) || (shape_8(tetrimino) == 1) ||
-		(shape_9(tetrimino) == 1) || (shape_10(tetrimino) == 1) ||
-		(shape_11(tetrimino) == 1) || (shape_12(tetrimino) == 1) ||
-		(shape_13(tetrimino) == 1) || (shape_14(tetrimino) == 1) ||
-		(shape_15(tetrimino) == 1) || (shape_16(tetrimino) == 1) ||
-		(shape_17(tetrimino) == 1) || (shape_18(tetrimino) == 1) ||
-		(shape_19(tetrimino) == 1))
-		return (0);
-	else
-		return (-1);
 }
 
 int	buf_chk(char *buf)
@@ -88,31 +80,4 @@ int	newline(char *buf, int nb_newlines)
 	if (*buf == '\n')
 		nb_newlines++;
 	return (nb_newlines);
-}
-
-int	valid_chk(char *buf)
-{
-	int pos;
-	int column;
-	int hashtag;
-
-	pos = 0;
-	hashtag = 0;
-	while (pos < 18)
-	{
-		column = 0;
-		while (column < 4)
-		{
-			if (!(buf[pos] == '.' || buf[pos] == '#'))
-				return (-1);
-			if (buf[pos] == '#')
-				hashtag++;
-			column++;
-			pos++;
-		}
-		pos++;
-	}
-	if (hashtag != 4)
-		return (-1);
-	return (0);
 }
