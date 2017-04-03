@@ -44,15 +44,15 @@ typedef struct		s_tetarray
 	int		size;
 }					slider;
 
-typedef struct		s_pos 	// A POSITION ON THE GRID
-{
-	char pos;
-}					pos_char;
+//typedef struct		s_pos 	// A POSITION ON THE GRID
+//{
+//	char pos;
+//}					pos_char;
 
 typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
 {
 	int			dimension;
-	pos_char	**pos;
+	char		**pos;
 }					grid;
 
 int					open_file(char *file);

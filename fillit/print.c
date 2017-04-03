@@ -37,7 +37,7 @@ void	print_grid(grid *fillit)
 		j = 0;
 		while (j < fillit->dimension)
 		{
-			ft_putchar(fillit->pos[i][j].pos);
+			ft_putchar(fillit->pos[i][j]);
 			j++;
 		}
 		ft_putchar('\n');

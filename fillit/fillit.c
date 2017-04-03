@@ -45,18 +45,18 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 {
 	int i;
 	int j;
-	grid *fillit;
-	pos_char **pos_array;
-	pos_char *pos_row;
+	grid *fillit_grid;
+	char **pos_array;
+	char *pos_row;
 	
 	i = 0;
 	j = 0;
-	fillit = (grid *)malloc(sizeof(grid));
-	pos_array = (pos_char **)malloc(sizeof(pos_char *) * smallest);
+	fillit_grid = (grid *)malloc(sizeof(grid));
+	pos_array = (char **)malloc(sizeof(char *) * smallest);
 	while (i < smallest)
 	{
 		// MALLOC EACH ROW OF POS_ARRAY
-		pos_row = (pos_char *)malloc(sizeof(pos_char) * smallest);
+		pos_row = (char *)malloc(sizeof(char) * smallest);
 		pos_array[i] = pos_row;
 		i++;
 	}
@@ -65,22 +65,24 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 	{
 		while (j < smallest)
 		{
-			pos_array[i][j].pos = '.';
+			pos_array[i][j] = '.';
+			ft_putchar('.');
 			j++;
 		}
+		ft_putchar('\n');
 		i++;
 	}
-	fillit->pos = pos_array;
-	fillit->dimension = smallest;
-	return (fillit);
+	fillit_grid->pos = pos_array;
+	fillit_grid->dimension = smallest;
+	return (fillit_grid);
 }
 
 void	fillit(slider *total)
 {
-	grid	*fillit;
+	grid	*fillit_grid;
 	int		size;
 
 	size = smallest_square(total);
-	fillit = grid_init(size);
-	print_grid(fillit);
+	fillit_grid = grid_init(size);
+	print_grid(fillit_grid);
 }
