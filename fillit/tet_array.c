@@ -23,7 +23,9 @@ slider	*tet_array(char *buf)
 	piece			**piece_array;
 	piece			**head;
 	int				size_array;
+	char			letter;
 
+	letter = 65;
 	size_array = count_pieces(buf);
 	if (size_array == -1)
 		return (NULL);
@@ -37,9 +39,10 @@ slider	*tet_array(char *buf)
 	head = piece_array;
 	while (size_array--)
 	{
-		*piece_array = tet_piece(buf);
+		*piece_array = tet_piece(buf, letter);
 		if (*piece_array == 0)
 			return (0);
+		letter++;
 		piece_array++;
 		buf += 21;
 	}
@@ -47,7 +50,7 @@ slider	*tet_array(char *buf)
 	return (total);
 }
 
-piece	*tet_piece(char *buf)
+piece	*tet_piece(char *buf, char letter)
 {
 	int		i;
 	int		j;
@@ -62,6 +65,7 @@ piece	*tet_piece(char *buf)
 	tetrimino = piece_set(tetrimino, buf, i, j);
 	if (tetrimino == 0)
 		return (0);
+	tetrimino->letter = letter;
 	return (tetrimino);
 }
 
