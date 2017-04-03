@@ -67,4 +67,5 @@ void	fillit(slider *total)
 	size = smallest_square(total);
 	fillit_grid = grid_init(size);
 	print_grid(fillit_grid);
+	//place();
 }

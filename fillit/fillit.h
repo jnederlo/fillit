@@ -36,6 +36,7 @@ typedef struct		s_coord
 typedef struct		s_tetrimino
 {
 	coord	pos[4];
+	char	letter;
 }					piece;
 
 typedef struct		s_tetarray
@@ -61,7 +62,7 @@ int					error_chk(int error_val);
 slider				*tet_array(char *buf);
 void				test_print(slider *total);
 int					count_pieces(char *buf);
-piece				*tet_piece(char *buf);
+piece				*tet_piece(char *buf, char letter);
 piece				*piece_init(piece *tetrimino);
 piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 int					buf_chk(char *buf);
