@@ -38,8 +38,9 @@ int	main(int argc, char **argv)
 		ft_putstr("error\n");
 		return (-1);
 	}
+	fillit(total);
 	free(buf);
-	test_print(total);	// OUR ACTUAL PRINT FUNCTION CALL WILL GO HERE
+	test_print(total);	// TEST PRINT ( ACTUAL PRINT WILL BE INSIDE fillit() )
 	if (error_chk(close(fd)) == -1)
 		return (0);
 	return (0);

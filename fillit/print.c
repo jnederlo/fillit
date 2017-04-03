@@ -24,3 +24,23 @@ void	test_print(slider *total)
 		i++;
 	}
 }
+
+void	print_grid(grid *fillit)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < fillit->dimension)
+	{
+		j = 0;
+		while (j < fillit->dimension)
+		{
+			ft_putchar(fillit->pos[i][j].pos);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}

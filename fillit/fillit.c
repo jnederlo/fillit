@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int	smallest_square(slider *total)
+int		smallest_square(slider *total)
 {
 	int smallest;
 
@@ -41,7 +41,38 @@ int	smallest_square(slider *total)
 //
 //}
 
-grid	*grid_init(int smallest)
+grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 {
+	int i;
+	int j;
+	grid *fillit;
+	pos_char **pos_array;
 
+	
+	i = 0;
+	j = 0;
+
+	fillit = (grid *)malloc(sizeof(grid));
+	pos_array = (pos_char **)malloc(sizeof(pos_char *) * smallest);
+	while (i < smallest)
+	{
+		while (j < smallest)
+		{
+			pos_array[i][j].pos = '.';
+			j++;
+		}
+		i++;
+	}
+	fillit->pos = pos_array;
+	return (fillit);
+}
+
+void	fillit(slider *total)
+{
+	grid	*fillit;
+	int		size;
+
+	size = smallest_square(total);
+	fillit = grid_init(size);
+	print_grid(fillit);
 }
