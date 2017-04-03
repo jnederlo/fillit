@@ -47,13 +47,20 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 	int j;
 	grid *fillit;
 	pos_char **pos_array;
-
+	pos_char *pos_row;
 	
 	i = 0;
 	j = 0;
-
 	fillit = (grid *)malloc(sizeof(grid));
 	pos_array = (pos_char **)malloc(sizeof(pos_char *) * smallest);
+	while (i < smallest)
+	{
+		// MALLOC EACH ROW OF POS_ARRAY
+		pos_row = (pos_char *)malloc(sizeof(pos_char) * smallest);
+		pos_array[i] = pos_row;
+		i++;
+	}
+	i = 0;
 	while (i < smallest)
 	{
 		while (j < smallest)
@@ -64,6 +71,7 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 		i++;
 	}
 	fillit->pos = pos_array;
+	fillit->dimension = smallest;
 	return (fillit);
 }
 
