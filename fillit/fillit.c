@@ -67,10 +67,8 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 		while (j < smallest)
 		{
 			pos_array[i][j] = '.';
-			ft_putchar('.');
 			j++;
 		}
-		ft_putchar('\n');
 		i++;
 	}
 	fillit_grid->pos = pos_array;
