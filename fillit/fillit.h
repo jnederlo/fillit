@@ -93,5 +93,6 @@ int					shape_16(piece *tetrimino);
 int					shape_17(piece *tetrimino);
 int					shape_18(piece *tetrimino);
 int					shape_19(piece *tetrimino);
+piece				*piece_min(piece *tetrimino);
 
 #endif

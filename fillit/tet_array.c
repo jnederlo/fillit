@@ -85,10 +85,6 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			j++;
 			column++;
 		}
-		// ADDING IN ROW = 1 HERE;
-		else if (buf[i] == '\n' && !(buf[i - 1] == '#' || buf[i - 2] == '#' 
-				|| buf[i - 3] == '#' || (buf[i - 4] == '#')))
-				column = 1;
 		else if (buf[i] == '\n')
 		{
 			column = 1;
@@ -96,6 +92,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		}
 		i++;
 	}
+	tetrimino = piece_min(tetrimino);
 	// ADDED in_contact ERROR CHECK HERE
 	/*
 	if (in_contact(tetrimino) == -1)
@@ -105,6 +102,31 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 	}
 	//*/
 	
+	return (tetrimino);
+}
+
+piece	*piece_min(piece *tetrimino)
+{
+	int	row;
+	int	i;
+
+	row = 1;
+	i = 0;
+	while (row++ < tetrimino->pos[0].y)
+			i++;
+	tetrimino->pos[0].y = tetrimino->pos[0].y - i;
+	tetrimino->pos[1].y = tetrimino->pos[1].y - i;
+	tetrimino->pos[2].y = tetrimino->pos[2].y - i;
+	tetrimino->pos[3].y = tetrimino->pos[3].y - i;
+
+	while (tetrimino->pos[0].x > 1 && tetrimino->pos[1].x > 1
+		&& tetrimino->pos[2].x > 1 && tetrimino->pos[3].x > 1)
+		{
+			tetrimino->pos[0].x = tetrimino->pos[0].x - 1;
+			tetrimino->pos[1].x = tetrimino->pos[1].x - 1;
+			tetrimino->pos[2].x = tetrimino->pos[2].x - 1;
+			tetrimino->pos[3].x = tetrimino->pos[3].x - 1;
+		}
 	return (tetrimino);
 }
 
