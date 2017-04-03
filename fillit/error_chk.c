@@ -35,9 +35,23 @@ int	error_chk(int error_val)
 
 int	in_contact(piece *tetrimino)
 {
-	int	i;
+	//int	i;
 
-	i = 0;
+	//i = 0;
+	if ((shape_1(tetrimino) == 1) || (shape_2(tetrimino) == 1) ||
+		(shape_3(tetrimino) == 1) || (shape_4(tetrimino) == 1) ||
+		(shape_5(tetrimino) == 1) || (shape_6(tetrimino) == 1) ||
+		(shape_7(tetrimino) == 1) || (shape_8(tetrimino) == 1) ||
+		(shape_9(tetrimino) == 1) || (shape_10(tetrimino) == 1) ||
+		(shape_11(tetrimino) == 1) || (shape_12(tetrimino) == 1) ||
+		(shape_13(tetrimino) == 1) || (shape_14(tetrimino) == 1) ||
+		(shape_15(tetrimino) == 1) || (shape_16(tetrimino) == 1) ||
+		(shape_17(tetrimino) == 1) || (shape_18(tetrimino) == 1) ||
+		(shape_19(tetrimino) == 1))
+		return (0);
+	else
+		return (-1);
+	/*
 	while (i < 3)
 	{
 		if (tetrimino->pos[i + 1].x == tetrimino->pos[i].x &&
@@ -53,6 +67,7 @@ int	in_contact(piece *tetrimino)
 			return (-1);
 	}
 	return (0);
+	*/
 }
 
 int	buf_chk(char *buf)

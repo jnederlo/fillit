@@ -74,5 +74,24 @@ grid				*grid_init(int smallest);
 int					check_map(grid *current_grid);
 void				fillit(slider *total);
 void				print_grid(grid *fillit);
+int					shape_1(piece *tetrimino);
+int					shape_2(piece *tetrimino);
+int					shape_3(piece *tetrimino);
+int					shape_4(piece *tetrimino);
+int					shape_5(piece *tetrimino);
+int					shape_6(piece *tetrimino);
+int					shape_7(piece *tetrimino);
+int					shape_8(piece *tetrimino);
+int					shape_9(piece *tetrimino);
+int					shape_10(piece *tetrimino);
+int					shape_11(piece *tetrimino);
+int					shape_12(piece *tetrimino);
+int					shape_13(piece *tetrimino);
+int					shape_14(piece *tetrimino);
+int					shape_15(piece *tetrimino);
+int					shape_16(piece *tetrimino);
+int					shape_17(piece *tetrimino);
+int					shape_18(piece *tetrimino);
+int					shape_19(piece *tetrimino);
 
 #endif

@@ -86,8 +86,8 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			column++;
 		}
 		// ADDING IN ROW = 1 HERE;
-		else if (buf[i] == '\n' && !(buf[i - 1] == '#' 
-				|| buf[i - 2] == '#' || buf[i - 3] == '#'))
+		else if (buf[i] == '\n' && !(buf[i - 1] == '#' || buf[i - 2] == '#' 
+				|| buf[i - 3] == '#' || (buf[i - 4] == '#')))
 				column = 1;
 		else if (buf[i] == '\n')
 		{
@@ -97,7 +97,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		i++;
 	}
 	// ADDED in_contact ERROR CHECK HERE
-	///*
+	/*
 	if (in_contact(tetrimino) == -1)
 	{
 		printf("in_contact is returning: %i\n", in_contact(tetrimino));
