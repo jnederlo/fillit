@@ -14,26 +14,9 @@
 
 int		smallest_square(slider *total)
 {
-	int smallest;
-
-	smallest = 1;
-	if (total->size == 1)
-		smallest = 2;
-	else if (total->size == 2)
-		smallest = 3;
-	else if (total->size == 3)
-		smallest = 4;
-	else if (total->size == 4)
-		smallest = 4;
-	else if (total->size == 5)
-		smallest = 5;
-	else if (total->size == 6)
-		smallest = 5;
-	else if (total->size == 7)
-		smallest = 6;
-	else if (total->size == 8)
-		smallest = 6;
-	return (smallest);
+	int	smallest_square[26] = {2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7,
+		 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
+	return (smallest_square[total->size - 1]);
 }
 
 //int	check_map()
