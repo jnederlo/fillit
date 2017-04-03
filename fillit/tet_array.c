@@ -34,11 +34,8 @@ slider	*tet_array(char *buf)
 	while (size_array--)
 	{
 		*piece_array = tet_piece(buf);
-		// ADDED THIS RETURN HERE
-		///*
 		if (*piece_array == 0)
 			return (0);
-		//*/
 		piece_array++;
 		buf += 21;
 	}
@@ -59,11 +56,8 @@ piece	*tet_piece(char *buf)
 		return (0);
 	tetrimino = piece_init(tetrimino);
 	tetrimino = piece_set(tetrimino, buf, i, j);
-	// ADDED THIS RETURN HERE
-	///*
 	if (tetrimino == 0)
 		return (0);
-	//*/
 	return (tetrimino);
 }
 
@@ -93,15 +87,8 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 		i++;
 	}
 	tetrimino = piece_min(tetrimino);
-	// ADDED in_contact ERROR CHECK HERE
-	/*
 	if (in_contact(tetrimino) == -1)
-	{
-		printf("in_contact is returning: %i\n", in_contact(tetrimino));
 		return (0);
-	}
-	//*/
-	
 	return (tetrimino);
 }
 

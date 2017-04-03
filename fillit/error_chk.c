@@ -35,9 +35,6 @@ int	error_chk(int error_val)
 
 int	in_contact(piece *tetrimino)
 {
-	//int	i;
-
-	//i = 0;
 	if ((shape_1(tetrimino) == 1) || (shape_2(tetrimino) == 1) ||
 		(shape_3(tetrimino) == 1) || (shape_4(tetrimino) == 1) ||
 		(shape_5(tetrimino) == 1) || (shape_6(tetrimino) == 1) ||
@@ -51,23 +48,6 @@ int	in_contact(piece *tetrimino)
 		return (0);
 	else
 		return (-1);
-	/*
-	while (i < 3)
-	{
-		if (tetrimino->pos[i + 1].x == tetrimino->pos[i].x &&
-			tetrimino->pos[i + 1].y == tetrimino->pos[i].y + 1)
-			i++;
-		else if (tetrimino->pos[i + 1].y == tetrimino->pos[i].y &&
-			tetrimino->pos[i + 1].x == tetrimino->pos[i].x + 1)
-			i++;
-		else if (tetrimino->pos[i + 1].y == tetrimino->pos[i].y &&
-			tetrimino->pos[i + 1].x == tetrimino->pos[i].x - 1)
-			i++;
-		else 
-			return (-1);
-	}
-	return (0);
-	*/
 }
 
 int	buf_chk(char *buf)
