@@ -63,6 +63,7 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 	i = 0;
 	while (i < smallest)
 	{
+		j = 0;
 		while (j < smallest)
 		{
 			pos_array[i][j] = '.';
