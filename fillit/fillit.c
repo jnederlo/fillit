@@ -19,12 +19,37 @@ int		smallest_square(slider *total)
 	return (smallest_square[total->size - 1]);
 }
 
-//int	check_map()
+//int		check_map(grid *fillit_grid, coord pos, piece *tet_piece)
 //{
-//
+//	
 //}
 
-grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
+/*coord	get_next_pos(grid *fillit_grid)
+{
+	int x;
+	int y;
+	int i;
+	int j;
+	coord pos;
+
+	x = 1;
+	y = 1;
+	i = 0;
+	j = 0;
+	while (i < fillit_grid->dimension && j < fillit_grid->dimension)
+	{
+		if (fillit_grid->pos[i][j] == '.')
+		{
+			pos.x = i + 1;
+			pos.x = j + 1;
+		}
+		j++;
+	}
+	return (pos);
+}
+*/
+
+grid	*grid_init(int size) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 {
 	int i;
 	int j;
@@ -35,19 +60,19 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 	i = 0;
 	j = 0;
 	fillit_grid = (grid *)malloc(sizeof(grid));
-	pos_array = (char **)malloc(sizeof(char *) * smallest + 2);
-	while (i < smallest)
+	pos_array = (char **)malloc((sizeof(char *) * (size + 2)));
+	while (i < size + 2)
 	{
 		// MALLOC EACH ROW OF POS_ARRAY
-		pos_row = (char *)malloc(sizeof(char) * smallest + 2);
+		pos_row = (char *)malloc(sizeof(char) * (size + 2));
 		pos_array[i] = pos_row;
 		i++;
 	}
 	i = 0;
-	while (i < smallest)
+	while (i < size + 2)
 	{
 		j = 0;
-		while (j < smallest)
+		while (j < size + 2)
 		{
 			pos_array[i][j] = '.';
 			j++;
@@ -55,7 +80,7 @@ grid	*grid_init(int smallest) // NEED TO MALLOC WORST CASE INSTEAD OF SMALLEST
 		i++;
 	}
 	fillit_grid->pos = pos_array;
-	fillit_grid->dimension = smallest;
+	fillit_grid->smallest = size;
 	return (fillit_grid);
 }
 

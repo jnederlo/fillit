@@ -25,19 +25,19 @@ void	test_print(slider *total)
 	}
 }
 
-void	print_grid(grid *fillit)
+void	print_grid(grid *fillit_grid)
 {
 	int i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while (i < fillit->dimension)
+	while (i < fillit_grid->smallest)
 	{
 		j = 0;
-		while (j < fillit->dimension)
+		while (j < fillit_grid->smallest)
 		{
-			ft_putchar(fillit->pos[i][j]);
+			ft_putchar(fillit_grid->pos[i][j]);
 			j++;
 		}
 		ft_putchar('\n');
