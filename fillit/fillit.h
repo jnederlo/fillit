@@ -27,6 +27,9 @@
 # define BOLDRED	"\033[1m\033[31m"
 # define BOLDCYAN    "\033[1m\033[36m"
 
+static const int g_smallest_square[26] = {2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7,
+		 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
+
 typedef struct		s_coord
 {
 	int	x;

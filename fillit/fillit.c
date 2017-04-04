@@ -14,9 +14,7 @@
 
 int		smallest_square(slider *total)
 {
-	int	smallest_square[26] = {2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7,
-		 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
-	return (smallest_square[total->size - 1]);
+	return (g_smallest_square[total->size - 1]);
 }
 
 //int		check_map(grid *fillit_grid, coord pos, piece *tet_piece)
