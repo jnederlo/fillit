@@ -32,10 +32,10 @@ void	print_grid(grid *fillit_grid)
 
 	i = 0;
 	j = 0;
-	while (i < fillit_grid->smallest)
+	while (i < fillit_grid->smallest + 2)
 	{
 		j = 0;
-		while (j < fillit_grid->smallest)
+		while (j < fillit_grid->smallest + 2)
 		{
 			ft_putchar(fillit_grid->pos[i][j]);
 			j++;
