@@ -66,11 +66,14 @@ piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 int					buf_chk(char *buf);
 int					valid_chk(char *buf);
 int					usage(int argc);
-int					smallest_square(slider *total);
 int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
-grid				*grid_init(int size);
+int					smallest_square(slider *total);
+coord				get_next_pos(coord start, grid *fillit_grid);
 int					check_map(grid *current_grid);
+grid				*place(coord grid_pos, grid *fillit_grid, piece *tet_piece);
+void				clear_piece(grid *fillit_grid, piece *tet_piece);
+grid				*grid_init(int size);
 void				fillit(slider *total);
 void				print_grid(grid *fillit);
 int					shape_1(piece *tetrimino);
@@ -93,5 +96,7 @@ int					shape_17(piece *tetrimino);
 int					shape_18(piece *tetrimino);
 int					shape_19(piece *tetrimino);
 piece				*piece_min(piece *tetrimino);
+
+grid				*grid_initTEST(int size, char letter);
 
 #endif
