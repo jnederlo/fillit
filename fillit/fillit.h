@@ -71,7 +71,7 @@ int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
 coord				get_next_pos(coord start, grid *fillit_grid);
 int					check_map(grid *current_grid);
-grid				*place(coord grid_pos, grid *fillit_grid, piece *tet_piece);
+grid				*place(grid *fillit_grid, coord grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
 void				fillit(slider *total);

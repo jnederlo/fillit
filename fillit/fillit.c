@@ -55,11 +55,24 @@ coord	get_next_pos(coord start, grid *fillit_grid)
 //
 // }
 //
-// grid	*place(coord grid_pos, grid *fillit_grid, piece *tet_piece)
-// {
-//
-// }
-//
+
+grid	*place(grid *fillit_grid, coord grid_pos, piece *tet_piece)
+{
+	int i;
+	coord place;
+
+	i = 0;
+	while (i < 4)
+	{
+		place = tet_piece[i]->pos;
+		place.x = grid_pos.x - place.x;
+		place.y = grid_pos.y - place.y;
+		fillit_grid->pos[place.y][place.x] = tet_piece->letter;
+		i++;
+	}
+	return (fillit_grid);
+}
+
 void	clear_piece(grid *fillit_grid, piece *tet_piece)
 {
 	char letter;
@@ -172,5 +185,6 @@ void	fillit(slider *total)
 	next = get_next_pos(start, fillit_grid);
 	print_grid(fillit_grid);
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	//place();
+	fillit_grid = place(fillit_grid, next, total->piece_array[0]);
+	print_grid(fillit_grid);
 }
