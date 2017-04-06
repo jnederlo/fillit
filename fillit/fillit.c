@@ -50,11 +50,26 @@ coord	get_next_pos(coord start, grid *fillit_grid)
 	return (pos);
 }
 
-// int		check_map(coord start, grid *fillit_grid, piece *tet_piece)
-// {
-//
-// }
-//
+int		chk_map(coord start, grid *fillit_grid, piece *tet_piece)
+{
+	int i;
+	coord check;
+
+	i = 0;
+	while (i < 4)
+	{
+		check = tet_piece->pos[i];
+		check.x += start.x;
+		check.y += start.y;
+		if (check.x > fillit_grid->smallest ||
+			check.y > fillit_grid->smallest)
+			return (-1);
+		if (fillit_grid->pos[check.y - 2][check.x - 2] != '.')
+			return (-1);
+		i++;
+	}
+	return (1);
+}
 
 grid	*place(grid *fillit_grid, coord grid_pos, piece *tet_piece)
 {
@@ -67,8 +82,6 @@ grid	*place(grid *fillit_grid, coord grid_pos, piece *tet_piece)
 		place = tet_piece->pos[i];
 		place.x += grid_pos.x - 1;
 		place.y += grid_pos.y - 1;
-
-
 		fillit_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
 		i++;
 	}
@@ -130,40 +143,6 @@ grid	*grid_init(int size)
 	return (fillit_grid);
 }
 
-grid	*grid_initTEST(int size, char letter)
-{
-	int i;
-	int j;
-	grid *fillit_grid;
-	char **pos_array;
-	char *pos_row;
-
-	i = 0;
-	j = 0;
-	fillit_grid = (grid *)malloc(sizeof(grid));
-	pos_array = (char **)malloc((sizeof(char *) * (size + 2)));
-	while (i < size + 2)
-	{
-		pos_row = (char *)malloc(sizeof(char) * (size + 2));
-		pos_array[i] = pos_row;
-		i++;
-	}
-	i = 0;
-	while (i < size + 2)
-	{
-		j = 0;
-		while (j < size + 2)
-		{
-			pos_array[i][j] = letter;
-			j++;
-		}
-		i++;
-	}
-	fillit_grid->pos = pos_array;
-	fillit_grid->smallest = size;
-	return (fillit_grid);
-}
-
 void	fillit(slider *total)
 {
 	grid	*fillit_grid;
@@ -176,18 +155,22 @@ void	fillit(slider *total)
 	size = smallest_square(total);
 	fillit_grid = grid_init(size);
 	next = get_next_pos(start, fillit_grid);
+	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[3]));
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
 	print_grid(fillit_grid);
 	fillit_grid = place(fillit_grid, next, total->piece_array[3]);
 	next = get_next_pos(next, fillit_grid);
+	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[3]));
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
 	print_grid(fillit_grid);
 	fillit_grid = place(fillit_grid, next, total->piece_array[0]);
 	next = get_next_pos(next, fillit_grid);
+	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[3]));
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
 	print_grid(fillit_grid);
 	fillit_grid = place(fillit_grid, next, total->piece_array[2]);
 	next = get_next_pos(next, fillit_grid);
+	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[3]));
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
 	fillit_grid = place(fillit_grid, next, total->piece_array[1]);
 	print_grid(fillit_grid);
