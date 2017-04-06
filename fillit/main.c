@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		return (-1);
 	}
 	free(buf);
-	test_print(total);	// TEST PRINT ( ACTUAL PRINT WILL BE INSIDE fillit() )
+//	test_print(total);	// TEST PRINT ( ACTUAL PRINT WILL BE INSIDE fillit() )
 	fillit(total);
 	if (error_chk(close(fd)) == -1)
 		return (0);

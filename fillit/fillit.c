@@ -65,11 +65,11 @@ grid	*place(grid *fillit_grid, coord grid_pos, piece *tet_piece)
 	while (i < 4)
 	{
 		place = tet_piece->pos[i];
-		place.x -= grid_pos.x;
-		place.y -= grid_pos.y;
-		
+		place.x += grid_pos.x - 1;
+		place.y += grid_pos.y - 1;
 
-		fillit_grid->pos[place.y][place.x] = tet_piece->letter;
+
+		fillit_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
 		i++;
 	}
 	return (fillit_grid);
@@ -176,22 +176,19 @@ void	fillit(slider *total)
 	size = smallest_square(total);
 	fillit_grid = grid_init(size);
 	next = get_next_pos(start, fillit_grid);
-//PRINTF FOR get_next_pos
-	//printf("\nget_next_pos: %i,%i\n\n", next.x, next.y);
-//	print_grid(fillit_grid);
-	//printf("\n");
-	//fillit_grid = grid_initTEST(size, 'A');
-	//print_grid(fillit_grid);
-//	printf("\n");
-	//clear_piece(fillit_grid, total->piece_array[0]);
-	//next = get_next_pos(start, fillit_grid);
-	print_grid(fillit_grid);
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	fillit_grid = place(fillit_grid, next, total->piece_array[1]);
 	print_grid(fillit_grid);
-	clear_piece(fillit_grid, total->piece_array[0]);
+	fillit_grid = place(fillit_grid, next, total->piece_array[3]);
 	next = get_next_pos(next, fillit_grid);
 	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
+	print_grid(fillit_grid);
 	fillit_grid = place(fillit_grid, next, total->piece_array[0]);
+	next = get_next_pos(next, fillit_grid);
+	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
+	print_grid(fillit_grid);
+	fillit_grid = place(fillit_grid, next, total->piece_array[2]);
+	next = get_next_pos(next, fillit_grid);
+	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
+	fillit_grid = place(fillit_grid, next, total->piece_array[1]);
 	print_grid(fillit_grid);
 }
