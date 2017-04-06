@@ -64,7 +64,6 @@ int		chk_map(coord start, grid *fillit_grid, piece *tet_piece)
 		if (check.x - 1 >= fillit_grid->smallest ||
 			check.y - 1 >= fillit_grid->smallest)
 			return (-1);
-		printf("grid_check: %c\n", fillit_grid->pos[check.y - 1][check.x - 1]);
 		if (fillit_grid->pos[check.y - 1][check.x - 1] != '.')
 			return (-1);
 		i++;
