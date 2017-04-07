@@ -45,8 +45,8 @@ coord	get_next_pos(coord start, grid *fillit_grid)
 		check = 1;
 		y++;
 	}
-	pos.x = -1;
-	pos.y = -1;
+	pos.x = - 1;
+	pos.y = - 1;
 	return (pos);
 }
 
@@ -119,7 +119,7 @@ grid	*grid_init(int size)
 
 	i = 0;
 	j = 0;
-	fillit_grid = (grid *)malloc(sizeof(grid));
+	fillit_grid = (grid *)malloc(sizeof(grid)); //need to add checks after malloc.
 	pos_array = (char **)malloc((sizeof(char *) * (size + 2)));
 	while (i < size + 2)
 	{
