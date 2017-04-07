@@ -4,6 +4,7 @@ NAME			=	fillit
 LIBFT			=	libft
 CC				=	gcc
 FLAGS			=	-Wall -Werror -Wextra -o
+DEBUG			=	-g -Wall -Werror -Wextra -o
 LIBS			=	./libft/libft.a
 HEADER			=	fillit.h
 FILES			=	open_file.c read_file.c main.c error_chk_1.c error_chk_2.c \
@@ -18,8 +19,13 @@ $(NAME):
 	make -C./libft
 	$(CC) $(FLAGS) $(NAME) $(FILES) $(LIBS)
 
+lldb: 
+	make -C./libft
+	$(CC) $(DEBUG) $(NAME) $(FILES) $(LIBS)
+
 clean:
 	rm -f $(OBJECTS)
+	rm -rf fillit.dSYM
 
 fclean: clean
 	rm -f $(NAME)
