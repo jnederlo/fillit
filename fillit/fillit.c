@@ -50,11 +50,11 @@ coord	get_next_pos(coord start, grid *fillit_grid)
 	return (pos);
 }
 
-int		chk_map(coord start, grid *fillit_grid, piece *tet_piece)
+int		chk_map(grid *fillit_grid, coord start, piece *tet_piece)
 {
 	int i;
 	coord check;
-
+								// if start = -1, return -1;
 	i = 0;
 	while (i < 4)
 	{
@@ -121,17 +121,17 @@ grid	*grid_init(int size)
 	j = 0;
 	fillit_grid = (grid *)malloc(sizeof(grid)); //need to add checks after malloc.
 	pos_array = (char **)malloc((sizeof(char *) * (size + 2)));
-	while (i < size + 2)
+	while (i < size + 2) // WE CAN REMOVE MALLOC FOR SIZE + 2 
 	{
-		pos_row = (char *)malloc(sizeof(char) * (size + 2));
+		pos_row = (char *)malloc(sizeof(char) * (size + 2)); // WE CAN REMOVE MALLOC FOR SIZE + 2
 		pos_array[i] = pos_row;
 		i++;
 	}
 	i = 0;
-	while (i < size + 2)
+	while (i < size + 2) // WE CAN REMOVE MALLOC FOR SIZE + 2
 	{
 		j = 0;
-		while (j < size + 2)
+		while (j < size + 2) // WE CAN REMOVE MALLOC FOR SIZE + 2
 		{
 			pos_array[i][j] = '.';
 			j++;
@@ -155,23 +155,31 @@ void	fillit(slider *total)
 	size = smallest_square(total);
 	fillit_grid = grid_init(size);
 	next = get_next_pos(start, fillit_grid);
-	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[3]));
-	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	print_grid(fillit_grid);
-	fillit_grid = place(fillit_grid, next, total->piece_array[3]);
-	next = get_next_pos(next, fillit_grid);
-	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[0]));
-	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	print_grid(fillit_grid);
-	fillit_grid = place(fillit_grid, next, total->piece_array[0]);
-	next = get_next_pos(next, fillit_grid);
-	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[2]));
-	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	print_grid(fillit_grid);
-	fillit_grid = place(fillit_grid, next, total->piece_array[2]);
-	next = get_next_pos(next, fillit_grid);
-	printf("chk_map: %i\n", chk_map(next, fillit_grid, total->piece_array[1]));
-	printf("\nget_next_pos: %i,%i\n", next.x, next.y);
-	fillit_grid = place(fillit_grid, next, total->piece_array[1]);
-	print_grid(fillit_grid);
+	// if solve returned 1, we are done
+	// else if solve returned -1, we need to make new grid with size++ and try again
+	//		(free old one, make new one)
+	//		
+}
+
+int		solve(grid *fillit_grid, coord next, slider *total)
+{
+	int check;
+	if (total->index == size) // index ==  size means we are on the 'next' piece after placing the final piece
+		return (1); // we are done
+	if (total->index == -1)
+		return (-1); // we need to increase grid
+	check = chk_map(fillit_grid, next, total->piece_array[index]) == 1);
+	if (check = 1)
+		place(total->piece_array[index]); // place piece
+		// set fillit_grid->last to position of block that the placed piece started at (total->piece_array[index]->pos[0])
+		// total->index++;
+		// next = get_next_pos(fillit_grid->last);
+		// call solve again
+	else if (check == -1)
+		// if (next == -1)
+		//	index--;
+		//	clear last piece placed
+		// next = get_next_pos(next);
+		// call solve again	
+
 }

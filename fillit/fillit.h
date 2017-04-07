@@ -46,12 +46,14 @@ typedef struct		s_tetarray
 {
 	piece	**piece_array;
 	int		size;
+	int		index = 0;
 }					slider;
 
 typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
 {
 	int			smallest;
 	char		**pos;
+	coord		last;
 }					grid;
 
 int					open_file(char *file);
@@ -70,7 +72,7 @@ int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
 coord				get_next_pos(coord start, grid *fillit_grid);
-int					chk_map(coord start, grid *current_grid, piece *tet_piece);
+int					chk_map(grid *fillit_grid, coord start, piece *tet_piece);
 grid				*place(grid *fillit_grid, coord grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
