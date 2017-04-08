@@ -77,6 +77,7 @@ int					chk_map(grid *fillit_grid, coord *start, piece *tet_piece);
 grid				*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
+coord				*coord_init(int x, int y);
 coord				*coord_array_init(int size);
 void				fillit(slider *total);
 int					solve(grid *fillit_grid, coord *next, slider *total);
