@@ -62,11 +62,13 @@ coord	get_next_coord(coord start, grid *fillit_grid)
 	{
 		pos.x = start.x + 1;
 		pos.y = start.y;
+		return (pos);
 	}
 	else if (start.x == fillit_grid->smallest && start.y < fillit_grid->smallest)
 	{
 		pos.x = 1;
 		pos.y = start.y + 1;
+		return (pos);
 	}
 	pos.x = - 1;
 	pos.y = - 1;
@@ -203,19 +205,12 @@ void	fillit(slider *total)
 int		solve(grid *fillit_grid, coord next, slider *total)
 {
 	int check;
-	static int test = 1;
 
 	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
 		return (1); // we are done
 	if (total->index == -1)
 		return (-1); // we need to increase grid
 	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
-	//check = 1;
-	if (test == 1)
-	{
-		printf("CHK_MAP: %i\n", check);
-		test = 0;
-	}
 	if (check == 1)
 	{
 		printf("CHK_MAP: %i\n", check);
@@ -239,6 +234,8 @@ int		solve(grid *fillit_grid, coord next, slider *total)
 				return (-1);
 				//solve(fillit_grid, next, total);
 			clear_piece(fillit_grid, total->piece_array[total->index]); // clear last piece placed
+			next = fillit_grid->last;
+			print_grid(fillit_grid);
 		}
 		if (fillit_grid->last.x == -1 && fillit_grid->last.y == -1) // IF NO PIECES HAVE BEEN PLACED
 		{
