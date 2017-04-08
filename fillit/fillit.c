@@ -240,8 +240,8 @@ int		solve(grid *fillit_grid, coord *next, slider *total)
 		print_grid(fillit_grid);
 		fillit_grid->last[total->index].x = next->x; // set fillit_grid->last to position of block that the placed piece started at
 		fillit_grid->last[total->index].y = next->y;
-		total->index++;
 		next = get_next_pos(&(fillit_grid->last[total->index]), fillit_grid);
+		total->index++;
 		solve(fillit_grid, next, total);
 	}	
 	else if (check == -1)
