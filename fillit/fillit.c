@@ -52,6 +52,27 @@ coord	get_next_pos(coord start, grid *fillit_grid)
 	return (pos);
 }
 
+coord	get_next_coord(coord start, grid *fillit_grid)
+{
+	coord pos;
+
+	if (start.x == -1 && start.y == -1)
+		return (start);
+	if (start.x < fillit_grid->smallest)
+	{
+		pos.x = start.x + 1;
+		pos.y = start.y;
+	}
+	else if (start.x == fillit_grid->smallest && start.y < fillit_grid->smallest)
+	{
+		pos.x = 1;
+		pos.y = start.y + 1;
+	}
+	pos.x = - 1;
+	pos.y = - 1;
+	return (pos);
+}
+
 int		chk_map(grid *fillit_grid, coord start, piece *tet_piece)
 {
 	int i;
@@ -224,7 +245,8 @@ int		solve(grid *fillit_grid, coord next, slider *total)
 			printf("LAST = -1\n");
 			return (-1);
 		}
-		next = get_next_pos(fillit_grid->last, fillit_grid);
+		next = get_next_coord(next, fillit_grid);
+		next = get_next_pos(next, fillit_grid);
 		solve(fillit_grid, next, total);
 	}
 	return (1);

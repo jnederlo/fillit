@@ -72,6 +72,7 @@ int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
 coord				get_next_pos(coord start, grid *fillit_grid);
+coord				get_next_coord(coord start, grid *fillit_grid);
 int					chk_map(grid *fillit_grid, coord start, piece *tet_piece);
 grid				*place(grid *fillit_grid, coord grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
