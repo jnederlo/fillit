@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 		ft_putstr("error\n");
 		return (-1);
 	}
+	total->index = 0;
 	free(buf);
 //	test_print(total);	// TEST PRINT ( ACTUAL PRINT WILL BE INSIDE fillit() )
 	fillit(total);
