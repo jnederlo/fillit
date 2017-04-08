@@ -53,7 +53,7 @@ typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
 {
 	int			smallest;
 	char		**pos;
-	coord		last;
+	coord		*last;
 }					grid;
 
 int					open_file(char *file);
@@ -71,14 +71,15 @@ int					usage(int argc);
 int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
-coord				get_next_pos(coord start, grid *fillit_grid);
-coord				get_next_coord(coord start, grid *fillit_grid);
-int					chk_map(grid *fillit_grid, coord start, piece *tet_piece);
-grid				*place(grid *fillit_grid, coord grid_pos, piece *tet_piece);
+coord				*get_next_pos(coord *start, grid *fillit_grid);
+coord				*get_next_coord(coord *start, grid *fillit_grid);
+int					chk_map(grid *fillit_grid, coord *start, piece *tet_piece);
+grid				*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
+coord				*coord_array_init(int size);
 void				fillit(slider *total);
-int					solve(grid *fillit_grid, coord next, slider *total);
+int					solve(grid *fillit_grid, coord *next, slider *total);
 void				print_grid(grid *fillit);
 int					shape_1(piece *tetrimino);
 int					shape_2(piece *tetrimino);
