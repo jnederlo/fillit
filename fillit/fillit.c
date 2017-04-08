@@ -222,6 +222,7 @@ void	fillit(slider *total)
 		total->index = 0;
 		solve_check = solve(fillit_grid, start, total);
 	}
+	printf("\n");
 	print_grid(fillit_grid);
 }
 
@@ -237,6 +238,7 @@ int		solve(grid *fillit_grid, coord *next, slider *total)
 	if (check == 1)
 	{
 		fillit_grid = place(fillit_grid, next, total->piece_array[total->index]); // place piece
+		printf("\n");
 		print_grid(fillit_grid);
 		fillit_grid->last[total->index].x = next->x; // set fillit_grid->last to position of block that the placed piece started at
 		fillit_grid->last[total->index].y = next->y;
@@ -253,10 +255,12 @@ int		solve(grid *fillit_grid, coord *next, slider *total)
 				return (-1);
 			clear_piece(fillit_grid, total->piece_array[total->index]); // clear last piece placed
 			next = &(fillit_grid->last[total->index]);
+			printf("\n");
 			print_grid(fillit_grid);
 		}
-		if (fillit_grid->last[total->index].x == -1 && fillit_grid->last[total->index].y == -1) // IF NO PIECES HAVE BEEN PLACED
+		else if (fillit_grid->last[total->index].x == -1 && fillit_grid->last[total->index].y == -1) // IF NO PIECES HAVE BEEN PLACED
 			return (-1);
+		
 		next = get_next_coord(next, fillit_grid);
 		next = get_next_pos(next, fillit_grid);
 		solve(fillit_grid, next, total);
