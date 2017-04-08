@@ -46,7 +46,7 @@ typedef struct		s_tetarray
 {
 	piece	**piece_array;
 	int		size;
-	int		index = 0;
+	int		index;
 }					slider;
 
 typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
@@ -77,6 +77,7 @@ grid				*place(grid *fillit_grid, coord grid_pos, piece *tet_piece);
 void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
 void				fillit(slider *total);
+int					solve(grid *fillit_grid, coord next, slider *total);
 void				print_grid(grid *fillit);
 int					shape_1(piece *tetrimino);
 int					shape_2(piece *tetrimino);

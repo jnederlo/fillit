@@ -54,7 +54,9 @@ int		chk_map(grid *fillit_grid, coord start, piece *tet_piece)
 {
 	int i;
 	coord check;
-								// if start = -1, return -1;
+	
+	if (start.x == -1 && start.y == -1)
+		return (-1);
 	i = 0;
 	while (i < 4)
 	{
@@ -147,6 +149,7 @@ void	fillit(slider *total)
 {
 	grid	*fillit_grid;
 	int		size;
+	int		solve_check;
 	coord	start;
 	coord	next;
 
@@ -155,31 +158,42 @@ void	fillit(slider *total)
 	size = smallest_square(total);
 	fillit_grid = grid_init(size);
 	next = get_next_pos(start, fillit_grid);
-	// if solve returned 1, we are done
-	// else if solve returned -1, we need to make new grid with size++ and try again
-	//		(free old one, make new one)
-	//		
+	solve_check = solve(fillit_grid, start, total);
+	while (solve_check == -1)
+	{
+		//free grid pos (each line), then free struct.
+		fillit_grid = grid_init(fillit_grid->smallest + 1);
+		solve_check = solve(fillit_grid, start, total);
+	}
+	print_grid(fillit_grid);
 }
 
 int		solve(grid *fillit_grid, coord next, slider *total)
 {
 	int check;
-	if (total->index == size) // index ==  size means we are on the 'next' piece after placing the final piece
+
+	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
 		return (1); // we are done
 	if (total->index == -1)
 		return (-1); // we need to increase grid
-	check = chk_map(fillit_grid, next, total->piece_array[index]) == 1);
-	if (check = 1)
-		place(total->piece_array[index]); // place piece
-		// set fillit_grid->last to position of block that the placed piece started at (total->piece_array[index]->pos[0])
-		// total->index++;
-		// next = get_next_pos(fillit_grid->last);
-		// call solve again
+	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
+	if (check == 1)
+	{
+		fillit_grid = place(fillit_grid, next, total->piece_array[total->index]); // place piece
+		fillit_grid->last = next;// set fillit_grid->last to position of block that the placed piece started at
+		total->index++;
+		next = get_next_pos(fillit_grid->last, fillit_grid);
+		solve(fillit_grid, next, total);
+	}	
 	else if (check == -1)
-		// if (next == -1)
-		//	index--;
-		//	clear last piece placed
-		// next = get_next_pos(next);
-		// call solve again	
-
+	{
+		if (next.x == -1 && next.y == -1)
+			total->index--;
+		if (total->index == -1)
+			solve(fillit_grid, next, total);
+		clear_piece(fillit_grid, total->piece_array[total->index]);//	clear last piece placed
+		next = get_next_pos(fillit_grid->last, fillit_grid);
+		solve(fillit_grid, next, total);
+	}
+	return (1);
 }
