@@ -8,8 +8,8 @@ DEBUG			=	-g -Wall -Werror -Wextra -o
 LIBS			=	./libft/libft.a
 HEADER			=	fillit.h
 FILES			=	open_file.c read_file.c main.c error_chk_1.c error_chk_2.c \
-					tet_array.c piece_config.c print.c fillit.c tet_shapes_1.c \
-					tet_shapes_2.c tet_shapes_3.c tet_shapes_4.c \
+					tet_array.c piece_config.c print.c grid_maker.c tet_shapes_1.c \
+					tet_shapes_2.c tet_shapes_3.c tet_shapes_4.c placing.c \
 
 OBJECTS			=	$(FILES:%.c=%.o)
 
