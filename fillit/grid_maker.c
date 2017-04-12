@@ -22,7 +22,7 @@ coord	*coord_init(int x, int y)
 {
 	coord *pos;
 
-	pos = (coord *)malloc(sizeof(coord));
+	pos = (coord *)malloc(sizeof(coord)); //need to add malloc protection.
 	if (pos == NULL)
 		return (NULL);
 	pos->x = x;
