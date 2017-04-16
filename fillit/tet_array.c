@@ -80,11 +80,11 @@ int		count_pieces(char *buf)
 	{
 		if ((error = valid_chk(buf)) == -1)
 			return (-1);
-		buf += 19;
+		buf += 20;
 		if (*buf == '\n')
 		{
 			count++;
-			buf += 2;
+			buf += 1;
 		}
 		else if (*buf == '\0')
 		{

@@ -61,7 +61,8 @@ int	buf_chk(char *buf)
 					return (-1);
 				buf++;
 			}
-			if (*buf == '\n' ? nb_newlines = newline(buf, nb_newlines) : 0);
+			if (*buf == '\n')
+				nb_newlines = newline(buf, nb_newlines);
 			else if (*buf)
 				return (-1);
 			buf++;
