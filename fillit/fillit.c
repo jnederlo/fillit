@@ -88,18 +88,21 @@ coord	*get_next_coord(coord *start, grid *fillit_grid)
 int		chk_map(grid *fillit_grid, coord *start, piece *tet_piece)
 {
 	int i;
+	int diffx;
+	int diffy;
 	coord check;
 	
 	if (start->x == -1 && start->y == -1)
 		return (-1);
 	i = 0;
+	diffx = start->x - tet_piece->pos[0].x;
+	diffy = start->y - tet_piece->pos[0].y;
 	while (i < 4)
 	{
 		check = tet_piece->pos[i];
-		check.x += start->x - 1;
-		check.y += start->y - 1;
-		if (check.x - 1 >= fillit_grid->smallest ||
-			check.y - 1 >= fillit_grid->smallest)
+		check.x += diffx - 1;
+		check.y += diffy - 1;
+		if (check.x - 1 >= fillit_grid->smallest || check.y - 1 >= fillit_grid->smallest || check.x - 1 > 0 || check.y - 1 > 0)
 			return (-1);
 		if (fillit_grid->pos[check.y - 1][check.x - 1] != '.')
 			return (-1);
@@ -111,14 +114,18 @@ int		chk_map(grid *fillit_grid, coord *start, piece *tet_piece)
 grid	*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece)
 {
 	int i;
+	int diffx;
+	int diffy;
 	coord place;
 
 	i = 0;
+	diffx = grid_pos->x - tet_piece->pos[0].x;
+	diffy = grid_pos->y - tet_piece->pos[0].y;
 	while (i < 4)
 	{
 		place = tet_piece->pos[i];
-		place.x += grid_pos->x - 1;
-		place.y += grid_pos->y - 1;
+		place.x += diffx - 1;
+		place.y += diffy - 1;
 		fillit_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
 		i++;
 	}
@@ -187,7 +194,7 @@ coord	*coord_array_init(int size)
 	coord *coord_array;
 	coord coord_row;
 	
-	i = size;
+	i = 0;
 	coord_array = (coord *)malloc(sizeof(coord) * size);
 	if (coord_array == NULL)
 			return (NULL);
@@ -218,11 +225,11 @@ void	fillit(slider *total)
 	{
 		//free grid pos (each line), then free struct.
 		fillit_grid = grid_init(fillit_grid->smallest + 1);
-		print_grid(fillit_grid);
+//		print_grid(fillit_grid);
 		total->index = 0;
 		solve_check = solve(fillit_grid, start, total);
 	}
-	printf("\n");
+//	printf("\n");
 	print_grid(fillit_grid);
 }
 
@@ -258,7 +265,7 @@ int		solve(grid *fillit_grid, coord *next, slider *total)
 			// printf("\n");
 			// print_grid(fillit_grid);
 		}
-		else if (fillit_grid->last[total->index].x == -1 && fillit_grid->last[total->index].y == -1) // IF NO PIECES HAVE BEEN PLACED
+		else if (fillit_grid->last[0].x == -1 && fillit_grid->last[0].y == -1) // IF NO PIECES HAVE BEEN PLACED
 			return (-1);
 		
 		next = get_next_coord(next, fillit_grid);
