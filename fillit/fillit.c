@@ -213,7 +213,6 @@ void	fillit(slider *total)
 {
 	grid	*fillit_grid;
 	int		smallest;
-	int		solve_check;
 	coord	*start;
 	coord	*next;
 
@@ -221,16 +220,7 @@ void	fillit(slider *total)
 	smallest = smallest_square(total);
 	fillit_grid = grid_init(smallest);
 	next = get_next_pos(start, fillit_grid);
-	solve_check = solve(fillit_grid, next, total);
-	while (solve_check == -1)
-	{
-		//free grid pos (each line), then free struct.
-		fillit_grid = grid_init(fillit_grid->smallest + 1);
-//		print_grid(fillit_grid);
-		total->index = 0;
-		solve_check = solve(fillit_grid, start, total);
-	}
-//	printf("\n");
+	solve(fillit_grid, next, total);
 	print_grid(fillit_grid);
 }
 
@@ -238,10 +228,12 @@ int		solve(grid *fillit_grid, coord *next, slider *total)
 {
 	int check;
 
-	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
-		return (1); // we are done
 	if (total->index == -1)
-		return (-1); // we need to increase grid
+	{
+		fillit_grid = grid_init(fillit_grid->smallest + 1);
+		next = get_next_pos(coord_init(1, 1), fillit_grid);
+		total->index = 0;
+	}
 	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
 	if (check == 1)
 	{
