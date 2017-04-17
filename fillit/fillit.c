@@ -95,14 +95,15 @@ int		chk_map(grid *fillit_grid, coord *start, piece *tet_piece)
 	if (start->x == -1 && start->y == -1)
 		return (-1);
 	i = 0;
-	diffx = start->x - tet_piece->pos[0].x;
-	diffy = start->y - tet_piece->pos[0].y;
+	diffx = start->x - tet_piece->pos[i].x;
+	diffy = start->y - tet_piece->pos[i].y;
 	while (i < 4)
 	{
 		check = tet_piece->pos[i];
-		check.x += diffx - 1;
-		check.y += diffy - 1;
-		if (check.x - 1 >= fillit_grid->smallest || check.y - 1 >= fillit_grid->smallest || check.x - 1 > 0 || check.y - 1 > 0)
+		check.x += diffx;
+		check.y += diffy;
+		if (check.x > fillit_grid->smallest || check.y > fillit_grid->smallest || 
+			check.x < 1 || check.y < 1)
 			return (-1);
 		if (fillit_grid->pos[check.y - 1][check.x - 1] != '.')
 			return (-1);
@@ -119,13 +120,13 @@ grid	*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece)
 	coord place;
 
 	i = 0;
-	diffx = grid_pos->x - tet_piece->pos[0].x;
-	diffy = grid_pos->y - tet_piece->pos[0].y;
+	diffx = grid_pos[i].x - tet_piece->pos[i].x;
+	diffy = grid_pos[i].y - tet_piece->pos[i].y;
 	while (i < 4)
 	{
 		place = tet_piece->pos[i];
-		place.x += diffx - 1;
-		place.y += diffy - 1;
+		place.x += diffx;
+		place.y += diffy;
 		fillit_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
 		i++;
 	}
