@@ -213,7 +213,6 @@ void	fillit(slider *total)
 {
 	grid	*fillit_grid;
 	int		smallest;
-	int		solve_check;
 	coord	*start;
 	coord	*next;
 
@@ -221,57 +220,67 @@ void	fillit(slider *total)
 	smallest = smallest_square(total);
 	fillit_grid = grid_init(smallest);
 	next = get_next_pos(start, fillit_grid);
-	solve_check = solve(fillit_grid, next, total);
-	while (solve_check == -1)
-	{
-		//free grid pos (each line), then free struct.
-		fillit_grid = grid_init(fillit_grid->smallest + 1);
-//		print_grid(fillit_grid);
-		total->index = 0;
-		solve_check = solve(fillit_grid, start, total);
-	}
+	fillit_grid = solve(fillit_grid, next, total);
 //	printf("\n");
-	print_grid(fillit_grid);
+//	print_grid(fillit_grid);
 }
 
-int		solve(grid *fillit_grid, coord *next, slider *total)
+grid		*solve(grid *fillit_grid, coord *next, slider *total)
 {
 	int check;
 
 	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
-		return (1); // we are done
-	if (total->index == -1)
-		return (-1); // we need to increase grid
+		return (fillit_grid); // we are done
+	else if (total->index == -1)
+	{
+		fillit_grid = grid_init(fillit_grid->smallest + 1);
+		total->index = 0;
+		next = get_next_pos(coord_init(1, 1), fillit_grid);
+		fillit_grid = solve(fillit_grid, next, total);
+		return (fillit_grid);
+	}
 	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
 	if (check == 1)
 	{
 		fillit_grid = place(fillit_grid, next, total->piece_array[total->index]); // place piece
-		// printf("\n");
-		// print_grid(fillit_grid);
-		fillit_grid->last[total->index].x = next->x; // set fillit_grid->last to position of block that the placed piece started at
-		fillit_grid->last[total->index].y = next->y;
+		printf("\n");
+		print_grid(fillit_grid);
+		fillit_grid->last[total->index] = *next; // set fillit_grid->last to position of block that the placed piece started at
 		next = get_next_pos(coord_init(1, 1), fillit_grid);
 		total->index++;
-		solve(fillit_grid, next, total);
+		fillit_grid = solve(fillit_grid, next, total);
 	}	
 	else if (check == -1)
 	{
-		if (next->x == -1 && next->y == -1) // IF AT THE LAST POS
+		if (fillit_grid->last[0].x == -1 && fillit_grid->last[0].y == -1 &&
+				next->x == -1 && next->y == -1) // IF NO PIECES HAVE BEEN PLACED
 		{
+			fillit_grid = grid_init(fillit_grid->smallest + 1);
+			total->index = 0;
+			next = get_next_pos(coord_init(1, 1), fillit_grid);
+			fillit_grid = solve(fillit_grid, next, total);
+			return (fillit_grid);
+		}
+		else if (next->x == -1 && next->y == -1) // IF AT THE LAST POS
+		{
+			fillit_grid->last[total->index] = *coord_init(-1, -1);
 			total->index--;
 			if (total->index == -1) // IF AT LAST POS AND AT FIRST PIECE ALREADY
-				return (-1);
+			{
+				fillit_grid = grid_init(fillit_grid->smallest + 1);
+				total->index = 0;
+				next = get_next_pos(coord_init(1, 1), fillit_grid);
+				fillit_grid = solve(fillit_grid, next, total);
+				return (fillit_grid);
+			}
 			clear_piece(fillit_grid, total->piece_array[total->index]); // clear last piece placed
 			next = &(fillit_grid->last[total->index]);
-			// printf("\n");
-			// print_grid(fillit_grid);
+			printf("\n");
+			print_grid(fillit_grid);
 		}
-		else if (fillit_grid->last[0].x == -1 && fillit_grid->last[0].y == -1) // IF NO PIECES HAVE BEEN PLACED
-			return (-1);
-		
 		next = get_next_coord(next, fillit_grid);
 		next = get_next_pos(next, fillit_grid);
-		solve(fillit_grid, next, total);
+		fillit_grid = solve(fillit_grid, next, total);
 	}
-	return (1);
+	return (fillit_grid);
 }

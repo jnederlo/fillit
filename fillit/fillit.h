@@ -80,7 +80,7 @@ grid				*grid_init(int size);
 coord				*coord_init(int x, int y);
 coord				*coord_array_init(int size);
 void				fillit(slider *total);
-int					solve(grid *fillit_grid, coord *next, slider *total);
+grid				*solve(grid *fillit_grid, coord *next, slider *total);
 void				print_grid(grid *fillit);
 int					shape_1(piece *tetrimino);
 int					shape_2(piece *tetrimino);
