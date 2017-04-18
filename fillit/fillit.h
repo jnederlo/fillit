@@ -79,6 +79,7 @@ void				clear_piece(grid *fillit_grid, piece *tet_piece);
 grid				*grid_init(int size);
 coord				*coord_init(int x, int y);
 coord				*coord_array_init(int size);
+int					free_grid(grid *fillit_grid, int size); // TAKES GRID, FREES IT AND RETURNS SMALLEST
 void				fillit(slider *total);
 grid				*solve(grid *fillit_grid, coord *next, slider *total);
 void				print_grid(grid *fillit);
