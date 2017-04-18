@@ -214,13 +214,11 @@ int		free_grid(grid *fillit_grid, int size)
 	int smallest;
 	int i;
 	
+	size = 0;
+
 	smallest = fillit_grid->smallest;
 	i = 0;
-	while (i < size)
-	{
-		free(&fillit_grid->last[i]);
-		i++;
-	}
+	free(fillit_grid->last);
 	i = 0;
 	while (i < smallest)
 	{
@@ -252,24 +250,21 @@ void	fillit(slider *total)
 grid		*solve(grid *fillit_grid, coord *next, slider *total)
 {
 	int check;
+//	static int count = 0;
+
+//	count++;
+//	printf("COUNT: %i\n", count);
 
 	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
 		return (fillit_grid); // we are done
-	else if (total->index == -1)
-	{
-		fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
-		total->index = 0;
-		next = get_next_pos(coord_init(1, 1), fillit_grid);
-		fillit_grid = solve(fillit_grid, next, total);
-		return (fillit_grid);
-	}
 	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
 	if (check == 1)
 	{
 		fillit_grid = place(fillit_grid, next, total->piece_array[total->index]); // place piece
 //		printf("\n");
 //		print_grid(fillit_grid);
-		fillit_grid->last[total->index] = *next; // set fillit_grid->last to position of block that the placed piece started at
+		fillit_grid->last[total->index].x = next->x; // set fillit_grid->last to position of block that the placed piece started at
+		fillit_grid->last[total->index].y = next->y;
 		next = get_next_pos(coord_init(1, 1), fillit_grid);
 		total->index++;
 		fillit_grid = solve(fillit_grid, next, total);
@@ -287,7 +282,8 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 		}
 		else if (next->x == -1 && next->y == -1) // IF AT THE LAST POS
 		{
-			fillit_grid->last[total->index] = *coord_init(-1, -1);
+			fillit_grid->last[total->index].x = -1;
+			fillit_grid->last[total->index].y = -1;
 			total->index--;
 			if (total->index == -1) // IF AT LAST POS AND AT FIRST PIECE ALREADY
 			{
