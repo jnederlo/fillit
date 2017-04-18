@@ -231,17 +231,25 @@ int		free_grid(grid *fillit_grid, int size)
 	return (smallest);
 }
 
+coord	*free_coord(coord *pos)
+{
+	free(pos);
+	pos = NULL;
+	return (pos);
+}
+
 void	fillit(slider *total)
 {
 	grid	*fillit_grid;
 	int		smallest;
-	coord	*start;
+	coord	start;
 	coord	*next;
 
-	start = coord_init(1, 1);
+	start.x = 1;
+	start.y = 1;
 	smallest = smallest_square(total);
 	fillit_grid = grid_init(smallest);
-	next = get_next_pos(start, fillit_grid);
+	next = get_next_pos(&start, fillit_grid);
 	fillit_grid = solve(fillit_grid, next, total);
 //	printf("\n");
 	print_grid(fillit_grid);
@@ -250,13 +258,19 @@ void	fillit(slider *total)
 grid		*solve(grid *fillit_grid, coord *next, slider *total)
 {
 	int check;
-//	static int count = 0;
+	coord start;
+	static int count = 0;
 
-//	count++;
+	start.x = 1;
+	start.y = 1;
+	count++;
 //	printf("COUNT: %i\n", count);
 
 	if (total->index == total->size) // index ==  size means we are on the 'next' piece after placing the final piece
+	{
+		next = free_coord(next);
 		return (fillit_grid); // we are done
+	}
 	check = chk_map(fillit_grid, next, total->piece_array[total->index]);
 	if (check == 1)
 	{
@@ -265,7 +279,7 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 //		print_grid(fillit_grid);
 		fillit_grid->last[total->index].x = next->x; // set fillit_grid->last to position of block that the placed piece started at
 		fillit_grid->last[total->index].y = next->y;
-		next = get_next_pos(coord_init(1, 1), fillit_grid);
+		next = get_next_pos(&start, fillit_grid);
 		total->index++;
 		fillit_grid = solve(fillit_grid, next, total);
 	}	
@@ -276,8 +290,9 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 		{
 			fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
 			total->index = 0;
-			next = get_next_pos(coord_init(1, 1), fillit_grid);
+			next = get_next_pos(&start, fillit_grid);
 			fillit_grid = solve(fillit_grid, next, total);
+			next = free_coord(next);
 			return (fillit_grid);
 		}
 		else if (next->x == -1 && next->y == -1) // IF AT THE LAST POS
@@ -289,8 +304,9 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 			{
 				fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
 				total->index = 0;
-				next = get_next_pos(coord_init(1, 1), fillit_grid);
+				next = get_next_pos(&start, fillit_grid);
 				fillit_grid = solve(fillit_grid, next, total);
+				next = free_coord(next);
 				return (fillit_grid);
 			}
 			clear_piece(fillit_grid, total->piece_array[total->index]); // clear last piece placed
@@ -302,5 +318,6 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 		next = get_next_pos(next, fillit_grid);
 		fillit_grid = solve(fillit_grid, next, total);
 	}
+	next = free_coord(next);
 	return (fillit_grid);
 }
