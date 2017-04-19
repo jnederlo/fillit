@@ -88,13 +88,11 @@ void	fillit(slider *total)
 	grid	*fillit_grid;
 	int		smallest;
 	coord	start;
-	coord	*next;
 
 	start.x = 1;
 	start.y = 1;
 	smallest = smallest_square(total);
 	fillit_grid = grid_init(smallest);
-	next = get_next_pos(&start, fillit_grid);
-	fillit_grid = solve(fillit_grid, next, total);
+	fillit_grid = solve(fillit_grid, &start, total);
 	print_grid(fillit_grid);
 }
