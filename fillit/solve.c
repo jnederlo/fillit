@@ -61,6 +61,7 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 	return (fillit_grid);
 }
 
+
 coord	*solve_place(grid *fillit_grid, coord *next, slider *total)
 {
 	fillit_grid = place(fillit_grid, next, total->piece_array[total->index]);
