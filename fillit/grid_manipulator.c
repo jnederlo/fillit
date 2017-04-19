@@ -25,26 +25,20 @@ grid	*grid_init(int size)
 	char	**pos_array;
 	char	*pos_row;
 
-	i = 0;
-	j = 0;
+	i = -1;
 	fillit_grid = (grid *)malloc(sizeof(grid));
 	pos_array = (char **)malloc((sizeof(char *) * (size)));
-	while (i < size)
+	while (i++ < size)
 	{
 		pos_row = (char *)malloc(sizeof(char) * (size));
 		pos_array[i] = pos_row;
-		i++;
 	}
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
-		j = 0;
-		while (j < size)
-		{
+		j = -1;
+		while (j++ < size)
 			pos_array[i][j] = '.';
-			j++;
-		}
-		i++;
 	}
 	fillit_grid->pos = pos_array;
 	fillit_grid->smallest = size;

@@ -21,32 +21,27 @@ slider	*tet_array(char *buf)
 {
 	slider			*total;
 	piece			**piece_array;
-	piece			**head;
-	int				size_array;
-	char			letter;
+	int				i;
 
-	letter = 65;
-	size_array = count_pieces(buf);
-	if (size_array == -1)
-		return (NULL);
 	total = (slider *)malloc(sizeof(slider));
 	if (!total)
 		return (0);
-	total->size = size_array;
-	piece_array = (piece **)malloc(sizeof(piece *) * size_array);
+	total->size = count_pieces(buf);
+	if (total->size == -1)
+		return (NULL);
+	piece_array = (piece **)malloc(sizeof(piece *) * total->size);
 	if (!piece_array)
 		return (0);
-	head = piece_array;
-	while (size_array--)
+	i = 0;
+	while (i < total->size)
 	{
-		*piece_array = tet_piece(buf, letter);
-		if (*piece_array == 0)
+		piece_array[i] = tet_piece(buf, i + 65);
+		if (piece_array[i] == 0)
 			return (0);
-		letter++;
-		piece_array++;
+		i++;
 		buf += 21;
 	}
-	total->piece_array = head;
+	total->piece_array = piece_array;
 	return (total);
 }
 
