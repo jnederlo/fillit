@@ -98,10 +98,3 @@ coord	*coord_array_init(int size)
 	}
 	return (coord_array);
 }
-
-coord	*free_coord(coord *pos)
-{
-	free(pos);
-	pos = NULL;
-	return (pos);
-}
