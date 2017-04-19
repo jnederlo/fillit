@@ -22,7 +22,7 @@
 
 #include "fillit.h"
 
-int usage(int argc)
+int	usage(int argc)
 {
 	if (argc != 2)
 	{
@@ -70,7 +70,7 @@ int	buf_chk(char *buf)
 		}
 		nb_newlines = newline(buf, nb_newlines);
 		if (*buf == '\0')
-			return nb_newlines < 130 ? 1 : -1;
+			return (nb_newlines < 130 ? 1 : -1);
 		buf++;
 	}
 	return (-1);
@@ -81,4 +81,14 @@ int	newline(char *buf, int nb_newlines)
 	if (*buf == '\n')
 		nb_newlines++;
 	return (nb_newlines);
+}
+
+int	total_error(slider *total)
+{
+	if (total == NULL)
+	{
+		ft_putstr("error\n");
+		return (-1);
+	}
+	return (0);
 }

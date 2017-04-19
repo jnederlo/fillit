@@ -68,6 +68,7 @@ piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
 int					buf_chk(char *buf);
 int					valid_chk(char *buf);
 int					usage(int argc);
+int					total_error(slider *total);
 int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
@@ -80,6 +81,7 @@ grid				*grid_init(int size);
 coord				*coord_init(int x, int y);
 coord				*coord_array_init(int size);
 int					free_grid(grid *fillit_grid, int size); // TAKES GRID, FREES IT AND RETURNS SMALLEST
+coord				*free_coord(coord *pos);
 void				fillit(slider *total);
 grid				*solve(grid *fillit_grid, coord *next, slider *total);
 void				print_grid(grid *fillit);

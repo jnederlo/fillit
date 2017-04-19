@@ -74,21 +74,18 @@ piece	*piece_min(piece *tetrimino)
 	row = 1;
 	i = 0;
 	while (row++ < tetrimino->pos[0].y)
-			i++;
+		i++;
 	tetrimino->pos[0].y = tetrimino->pos[0].y - i;
 	tetrimino->pos[1].y = tetrimino->pos[1].y - i;
 	tetrimino->pos[2].y = tetrimino->pos[2].y - i;
 	tetrimino->pos[3].y = tetrimino->pos[3].y - i;
-
 	while (tetrimino->pos[0].x > 1 && tetrimino->pos[1].x > 1
 		&& tetrimino->pos[2].x > 1 && tetrimino->pos[3].x > 1)
-		{
-			tetrimino->pos[0].x = tetrimino->pos[0].x - 1;
-			tetrimino->pos[1].x = tetrimino->pos[1].x - 1;
-			tetrimino->pos[2].x = tetrimino->pos[2].x - 1;
-			tetrimino->pos[3].x = tetrimino->pos[3].x - 1;
-		}
+	{
+		tetrimino->pos[0].x = tetrimino->pos[0].x - 1;
+		tetrimino->pos[1].x = tetrimino->pos[1].x - 1;
+		tetrimino->pos[2].x = tetrimino->pos[2].x - 1;
+		tetrimino->pos[3].x = tetrimino->pos[3].x - 1;
+	}
 	return (tetrimino);
 }
-
-

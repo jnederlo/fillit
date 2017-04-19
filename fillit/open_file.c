@@ -15,7 +15,7 @@
 int	open_file(char *file)
 {
 	int	fd;
-	
+
 	fd = open(file, O_RDONLY);
 	return (fd);
 }

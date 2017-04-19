@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	slider	*total;
 
 	if (usage(argc) == -1)
-		return (-1);
+		return (0);
 	fd = open_file(argv[1]);
 	if (error_chk(fd) == -1)
 		return (0);
@@ -33,14 +33,10 @@ int	main(int argc, char **argv)
 	if (error_chk(buf_chk(buf)) == -1)
 		return (0);
 	total = tet_array(buf);
-	if (total == NULL)
-	{
-		ft_putstr("error\n");
-		return (-1);
-	}
+	if (total_error(total) == -1)
+		return (0);
 	total->index = 0;
 	free(buf);
-//	test_print(total);	// TEST PRINT ( ACTUAL PRINT WILL BE INSIDE fillit() )
 	fillit(total);
 	if (error_chk(close(fd)) == -1)
 		return (0);

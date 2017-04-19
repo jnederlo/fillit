@@ -1,29 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/23 13:39:59 by jnederlo          #+#    #+#             */
+/*   Updated: 2017/03/23 13:40:11 by jnederlo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
-#include <stdio.h>
-
-void	test_print(slider *total)
-{
-	int	size;
-	int	i;
-	int	j;
-
-	size = total->size;
-	i = 0;
-	while (size--)
-	{
-		j = 0;
-		printf( BOLDCYAN "\nPiece %i:\n\n" RESET , i + 1);
-		printf( BLUE "COLUMN		ROW	%c\n" RESET , total->piece_array[i]->letter);
-		printf( BLUE "---------------------\n" RESET);
-		while (j < 4)
-		{
-			printf("%i \t\t%i\n", total->piece_array[i]->pos[j].x,
-			total->piece_array[i]->pos[j].y);
-			j++;
-		}
-		i++;
-	}
-}
 
 void	print_grid(grid *fillit_grid)
 {
