@@ -49,6 +49,7 @@ typedef struct		s_grid
 	int			smallest;
 	char		**pos;
 	coord		*last;
+	int			flag;
 }					grid;
 
 int					open_file(char *file);
