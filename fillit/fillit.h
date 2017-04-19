@@ -21,11 +21,6 @@
 # include <stdlib.h>
 
 # define BUF_SIZE 567
-# define RESET	"\033[0m"
-# define BLUE	"\033[34m"
-# define GREEN	"\033[32m"
-# define BOLDRED	"\033[1m\033[31m"
-# define BOLDCYAN    "\033[1m\033[36m"
 
 static const int g_smallest_square[26] = {2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7,
 		 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
@@ -49,7 +44,7 @@ typedef struct		s_tetarray
 	int		index;
 }					slider;
 
-typedef struct		s_grid 	// AN ARRAY OF POSITIONS AS 'EMPTY' OR 'FILLED'
+typedef struct		s_grid
 {
 	int			smallest;
 	char		**pos;

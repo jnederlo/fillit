@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> // NEED TO REMOVE THIS
 #include "fillit.h"
 
 grid		*solve(grid *fillit_grid, coord *next, slider *total)
