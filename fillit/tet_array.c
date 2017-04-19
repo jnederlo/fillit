@@ -51,7 +51,7 @@ piece	*tet_piece(char *buf, char letter)
 	int		j;
 	piece	*tetrimino;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	tetrimino = (piece *)malloc(sizeof(piece));
 	if (!tetrimino)

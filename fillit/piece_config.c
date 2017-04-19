@@ -42,14 +42,13 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 
 	column = 1;
 	row = 1;
-	while (i < 19)
+	while (++i < 19)
 	{
 		if (buf[i] == '.')
 			column++;
 		else if (buf[i] == '#')
 		{
-			tetrimino->pos[j].x = column;
-			tetrimino->pos[j].y = row;
+			tetrimino->pos[j] = *coord_init(column, row);
 			j++;
 			column++;
 		}
@@ -58,7 +57,6 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			column = 1;
 			row++;
 		}
-		i++;
 	}
 	tetrimino = piece_min(tetrimino);
 	if (in_contact(tetrimino) == -1)
