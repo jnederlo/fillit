@@ -24,20 +24,13 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 	{
 		check = chk_map(fillit_grid, next, total->piece_array[total->index]);
 		if (check == 1)
-		{
-			fillit_grid = place(fillit_grid, next, total->piece_array[total->index]);
-			fillit_grid->last[total->index].x = next->x;
-			fillit_grid->last[total->index].y = next->y;
-			next = get_next_pos(coord_init(1, 1), fillit_grid);
-			total->index++;
-		}
+			next = solve_place(fillit_grid, next, total);
 		else if (check == -1)
 		{
 			if (fillit_grid->last[0].x == -1 && fillit_grid->last[0].y == -1 &&
 				next->x == -1 && next->y == -1)
 			{
-				fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
-				total->index = 0;
+				fillit_grid = solve_new_grid(fillit_grid, total);
 				next = get_next_pos(coord_init(1, 1), fillit_grid);
 				flag = 0;
 			}
@@ -48,16 +41,12 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 				total->index--;
 				if (total->index == -1)
 				{
-					fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
-					total->index = 0;
+					fillit_grid = solve_new_grid(fillit_grid, total);
 					next = get_next_pos(coord_init(1, 1), fillit_grid);
 					flag = 0;
 				}
 				else
-				{
-					clear_piece(fillit_grid, total->piece_array[total->index]);
-					next = &(fillit_grid->last[total->index]);
-				}
+					next = solve_clear_piece(fillit_grid, next, total);
 			}
 			if (flag == 1)
 			{
@@ -70,4 +59,28 @@ grid		*solve(grid *fillit_grid, coord *next, slider *total)
 			solve = 0;
 	}
 	return (fillit_grid);
+}
+
+coord	*solve_place(grid *fillit_grid, coord *next, slider *total)
+{
+	fillit_grid = place(fillit_grid, next, total->piece_array[total->index]);
+	fillit_grid->last[total->index].x = next->x;
+	fillit_grid->last[total->index].y = next->y;
+	next = get_next_pos(coord_init(1, 1), fillit_grid);
+	total->index++;
+	return (next);
+}
+
+grid	*solve_new_grid(grid *fillit_grid, slider *total)
+{
+	fillit_grid = grid_init(free_grid(fillit_grid, total->size) + 1);
+	total->index = 0;
+	return (fillit_grid);
+}
+
+coord	*solve_clear_piece(grid *fillit_grid, coord *next, slider *total)
+{
+	clear_piece(fillit_grid, total->piece_array[total->index]);
+	next = &(fillit_grid->last[total->index]);
+	return (next);
 }
