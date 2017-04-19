@@ -68,12 +68,15 @@ coord	*get_next_coord(coord *start, grid *fillit_grid)
 	{
 		pos->x = start->x + 1;
 		pos->y = start->y;
+		pos = get_next_pos(pos, fillit_grid);
 		return (pos);
 	}
-	else if (start->x == fillit_grid->smallest && start->y < fillit_grid->smallest)
+	else if (start->x == fillit_grid->smallest &&
+		start->y < fillit_grid->smallest)
 	{
 		pos->x = 1;
 		pos->y = start->y + 1;
+		pos = get_next_pos(pos, fillit_grid);
 		return (pos);
 	}
 	return (pos);
