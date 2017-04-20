@@ -65,9 +65,8 @@ int	buf_chk(char *buf, int nb_newlines)
 			buf++;
 		}
 		nb_newlines = newline(buf, nb_newlines);
-		if (*buf == '\0')
+		if (*buf++ == '\0')
 			return (nb_newlines < 130 ? 1 : -1);
-		buf++;
 	}
 	return (-1);
 }
