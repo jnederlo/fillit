@@ -12,12 +12,12 @@
 
 #include "fillit.h"
 
-int		chk_map(grid *f_grid, coord *start, piece *tet_piece)
+int		chk_map(grid *f_grid, t_coord *start, piece *tet_piece)
 {
 	int		i;
 	int		diffx;
 	int		diffy;
-	coord	check;
+	t_coord	check;
 
 	f_grid->flag = 1;
 	if (start->x == -1 && start->y == -1)
@@ -40,12 +40,12 @@ int		chk_map(grid *f_grid, coord *start, piece *tet_piece)
 	return (1);
 }
 
-grid	*place(grid *f_grid, coord *grid_pos, piece *tet_piece)
+grid	*place(grid *f_grid, t_coord *grid_pos, piece *tet_piece)
 {
 	int		i;
 	int		diffx;
 	int		diffy;
-	coord	place;
+	t_coord	place;
 
 	i = 0;
 	diffx = grid_pos[i].x - tet_piece->pos[i].x;
@@ -64,7 +64,7 @@ grid	*place(grid *f_grid, coord *grid_pos, piece *tet_piece)
 void	clear_piece(grid *f_grid, piece *tet_piece)
 {
 	char	letter;
-	coord	pos;
+	t_coord	pos;
 
 	pos.x = 1;
 	pos.y = 1;
@@ -87,7 +87,7 @@ void	fillit(slider *total)
 {
 	grid	*f_grid;
 	int		smallest;
-	coord	start;
+	t_coord	start;
 
 	start.x = 1;
 	start.y = 1;

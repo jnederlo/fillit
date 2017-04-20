@@ -23,23 +23,23 @@
 # define BUF_SIZE 567
 
 static const int g_smallest_square[26] = {2, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 7,
-		 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
+	8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 11};
 
 typedef struct		s_coord
 {
 	int	x;
 	int	y;
-}					coord;
+}					t_coord;
 
 typedef struct		s_tetrimino
 {
-	coord	pos[4];
+	t_coord	pos[4];
 	char	letter;
 }					piece;
 
 typedef struct		s_tetarray
 {
-	piece	**piece_array;
+	piece	**p_array;
 	int		size;
 	int		index;
 }					slider;
@@ -48,7 +48,7 @@ typedef struct		s_grid
 {
 	int			smallest;
 	char		**pos;
-	coord		*last;
+	t_coord		*last;
 	int			flag;
 }					grid;
 
@@ -61,27 +61,27 @@ int					count_pieces(char *buf);
 piece				*tet_piece(char *buf, char letter);
 piece				*piece_init(piece *tetrimino);
 piece				*piece_set(piece *tetrimino, char *buf, int i, int j);
-int					buf_chk(char *buf);
+int					buf_chk(char *buf, int nb_newlines);
 int					valid_chk(char *buf);
 int					usage(int argc);
 int					total_error(slider *total);
 int					newline(char *buf, int nb_newlines);
 int					in_contact(piece *tetriminio);
 int					smallest_square(slider *total);
-coord				*get_next_pos(coord *start, grid *f_grid);
-coord				*get_next_coord(coord *start, grid *f_grid);
-int					chk_map(grid *f_grid, coord *start, piece *tet_piece);
-grid				*place(grid *f_grid, coord *grid_pos, piece *tet_piece);
+t_coord				*get_next_pos(t_coord *start, grid *f_grid);
+t_coord				*get_next_coord(t_coord *start, grid *f_grid);
+int					chk_map(grid *f_grid, t_coord *start, piece *tet_piece);
+grid				*place(grid *f_grid, t_coord *grid_pos, piece *tet_piece);
 void				clear_piece(grid *f_grid, piece *tet_piece);
 grid				*grid_init(int size);
-coord				*coord_init(int x, int y);
-coord				*coord_array_init(int size);
+t_coord				*coord_init(int x, int y);
+t_coord				*coord_array_init(int size);
 int					free_grid(grid *f_grid, int size);
 void				fillit(slider *total);
-grid				*solve(grid *f_grid, coord *next, slider *total);
-coord				*solve_place(grid *f_grid, coord *next, slider *total);
-grid				*solve_new(grid *f_grid, slider *total);
-coord				*solve_clear_piece(grid *f_grid, coord *next, slider *total);
+grid				*solve(grid *f_grid, t_coord *next, slider *total);
+t_coord				*solve_place(grid *f_grid, t_coord *next, slider *total);
+grid				*solve_n(grid *f_grid, slider *total);
+t_coord				*solve_clear(grid *f_grid, t_coord *next, slider *total);
 void				print_grid(grid *fillit);
 int					shape_1(piece *tetrimino);
 int					shape_2(piece *tetrimino);

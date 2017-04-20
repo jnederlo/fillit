@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord_manipulator.c                                :+:      :+:    :+:   */
+/*   t_coord_manipulator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,11 @@
 
 #include "fillit.h"
 
-coord	*coord_init(int x, int y)
+t_coord	*coord_init(int x, int y)
 {
-	coord *pos;
+	t_coord *pos;
 
-	pos = (coord *)malloc(sizeof(coord));
+	pos = (t_coord *)malloc(sizeof(t_coord));
 	if (pos == NULL)
 		return (NULL);
 	pos->x = x;
@@ -24,12 +24,12 @@ coord	*coord_init(int x, int y)
 	return (pos);
 }
 
-coord	*get_next_pos(coord *start, grid *f_grid)
+t_coord	*get_next_pos(t_coord *start, grid *f_grid)
 {
 	int		x;
 	int		y;
 	int		check;
-	coord	*pos;
+	t_coord	*pos;
 
 	if (start->x == -1 && start->y == -1)
 		return (start);
@@ -44,11 +44,7 @@ coord	*get_next_pos(coord *start, grid *f_grid)
 		while (x <= f_grid->smallest)
 		{
 			if (f_grid->pos[y - 1][x - 1] == '.')
-			{
-				pos->x = x;
-				pos->y = y;
-				return (pos);
-			}
+				return (coord_init(x, y));
 			x++;
 		}
 		check = 1;
@@ -57,9 +53,9 @@ coord	*get_next_pos(coord *start, grid *f_grid)
 	return (pos);
 }
 
-coord	*get_next_coord(coord *start, grid *f_grid)
+t_coord	*get_next_coord(t_coord *start, grid *f_grid)
 {
-	coord *pos;
+	t_coord *pos;
 
 	if (start->x == -1 && start->y == -1)
 		return (start);
@@ -82,14 +78,14 @@ coord	*get_next_coord(coord *start, grid *f_grid)
 	return (pos);
 }
 
-coord	*coord_array_init(int size)
+t_coord	*coord_array_init(int size)
 {
 	int		i;
-	coord	*coord_array;
-	coord	coord_row;
+	t_coord	*coord_array;
+	t_coord	coord_row;
 
 	i = 0;
-	coord_array = (coord *)malloc(sizeof(coord) * size);
+	coord_array = (t_coord *)malloc(sizeof(t_coord) * size);
 	if (coord_array == NULL)
 		return (NULL);
 	while (i < size)

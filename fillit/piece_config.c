@@ -21,7 +21,7 @@
 
 piece	*piece_init(piece *tetrimino)
 {
-	coord	xy;
+	t_coord	xy;
 	int		i;
 
 	i = 0;

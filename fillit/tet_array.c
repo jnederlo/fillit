@@ -41,7 +41,8 @@ slider	*tet_array(char *buf)
 		i++;
 		buf += 21;
 	}
-	total->piece_array = piece_array;
+	total->p_array = piece_array;
+	total->index = 0;
 	return (total);
 }
 

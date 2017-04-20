@@ -42,17 +42,15 @@ int	error_chk(int error_val)
 	return (0);
 }
 
-int	buf_chk(char *buf)
+int	buf_chk(char *buf, int nb_newlines)
 {
 	int	pos;
-	int nb_newlines;
 	int row;
 
-	nb_newlines = 0;
 	while (*buf)
 	{
-		row = 1;
-		while (row < 5)
+		row = 0;
+		while (++row < 5)
 		{
 			pos = -1;
 			while (pos++ < 3)
@@ -61,12 +59,10 @@ int	buf_chk(char *buf)
 					return (-1);
 				buf++;
 			}
-			if (*buf == '\n')
-				nb_newlines = newline(buf, nb_newlines);
-			else if (*buf)
+			nb_newlines = newline(buf, nb_newlines);
+			if (*buf != '\n' && *buf)
 				return (-1);
 			buf++;
-			row++;
 		}
 		nb_newlines = newline(buf, nb_newlines);
 		if (*buf == '\0')

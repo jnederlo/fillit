@@ -19,6 +19,7 @@
 int	main(int argc, char **argv)
 {
 	int		fd;
+	int		nb_newlines;
 	char	*buf;
 	slider	*total;
 
@@ -30,12 +31,12 @@ int	main(int argc, char **argv)
 	buf = ft_strnew(BUF_SIZE);
 	if (error_chk(read_file(fd, buf)) == -1)
 		return (0);
-	if (error_chk(buf_chk(buf)) == -1)
+	nb_newlines = 0;
+	if (error_chk(buf_chk(buf, nb_newlines)) == -1)
 		return (0);
 	total = tet_array(buf);
 	if (total_error(total) == -1)
 		return (0);
-	total->index = 0;
 	free(buf);
 	fillit(total);
 	if (error_chk(close(fd)) == -1)
