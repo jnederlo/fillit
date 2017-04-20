@@ -24,7 +24,7 @@ coord	*coord_init(int x, int y)
 	return (pos);
 }
 
-coord	*get_next_pos(coord *start, grid *fillit_grid)
+coord	*get_next_pos(coord *start, grid *f_grid)
 {
 	int		x;
 	int		y;
@@ -37,13 +37,13 @@ coord	*get_next_pos(coord *start, grid *fillit_grid)
 	check = 0;
 	x = start->x;
 	y = start->y;
-	while (x <= fillit_grid->smallest || y <= fillit_grid->smallest)
+	while (x <= f_grid->smallest || y <= f_grid->smallest)
 	{
 		if (check)
 			x = 1;
-		while (x <= fillit_grid->smallest)
+		while (x <= f_grid->smallest)
 		{
-			if (fillit_grid->pos[y - 1][x - 1] == '.')
+			if (f_grid->pos[y - 1][x - 1] == '.')
 			{
 				pos->x = x;
 				pos->y = y;
@@ -57,26 +57,26 @@ coord	*get_next_pos(coord *start, grid *fillit_grid)
 	return (pos);
 }
 
-coord	*get_next_coord(coord *start, grid *fillit_grid)
+coord	*get_next_coord(coord *start, grid *f_grid)
 {
 	coord *pos;
 
 	if (start->x == -1 && start->y == -1)
 		return (start);
 	pos = coord_init(-1, -1);
-	if (start->x < fillit_grid->smallest)
+	if (start->x < f_grid->smallest)
 	{
 		pos->x = start->x + 1;
 		pos->y = start->y;
-		pos = get_next_pos(pos, fillit_grid);
+		pos = get_next_pos(pos, f_grid);
 		return (pos);
 	}
-	else if (start->x == fillit_grid->smallest &&
-		start->y < fillit_grid->smallest)
+	else if (start->x == f_grid->smallest &&
+		start->y < f_grid->smallest)
 	{
 		pos->x = 1;
 		pos->y = start->y + 1;
-		pos = get_next_pos(pos, fillit_grid);
+		pos = get_next_pos(pos, f_grid);
 		return (pos);
 	}
 	return (pos);

@@ -12,13 +12,14 @@
 
 #include "fillit.h"
 
-int		chk_map(grid *fillit_grid, coord *start, piece *tet_piece)
+int		chk_map(grid *f_grid, coord *start, piece *tet_piece)
 {
 	int		i;
 	int		diffx;
 	int		diffy;
 	coord	check;
 
+	f_grid->flag = 1;
 	if (start->x == -1 && start->y == -1)
 		return (-1);
 	i = 0;
@@ -29,18 +30,17 @@ int		chk_map(grid *fillit_grid, coord *start, piece *tet_piece)
 		check = tet_piece->pos[i];
 		check.x += diffx;
 		check.y += diffy;
-		if (check.x > fillit_grid->smallest ||
-			check.y > fillit_grid->smallest ||
-			check.x < 1 || check.y < 1)
+		if (check.x > f_grid->smallest || check.y > f_grid->smallest
+			|| check.x < 1 || check.y < 1)
 			return (-1);
-		if (fillit_grid->pos[check.y - 1][check.x - 1] != '.')
+		if (f_grid->pos[check.y - 1][check.x - 1] != '.')
 			return (-1);
 		i++;
 	}
 	return (1);
 }
 
-grid	*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece)
+grid	*place(grid *f_grid, coord *grid_pos, piece *tet_piece)
 {
 	int		i;
 	int		diffx;
@@ -55,13 +55,13 @@ grid	*place(grid *fillit_grid, coord *grid_pos, piece *tet_piece)
 		place = tet_piece->pos[i];
 		place.x += diffx;
 		place.y += diffy;
-		fillit_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
+		f_grid->pos[place.y - 1][place.x - 1] = tet_piece->letter;
 		i++;
 	}
-	return (fillit_grid);
+	return (f_grid);
 }
 
-void	clear_piece(grid *fillit_grid, piece *tet_piece)
+void	clear_piece(grid *f_grid, piece *tet_piece)
 {
 	char	letter;
 	coord	pos;
@@ -69,14 +69,14 @@ void	clear_piece(grid *fillit_grid, piece *tet_piece)
 	pos.x = 1;
 	pos.y = 1;
 	letter = tet_piece->letter;
-	while (pos.x <= fillit_grid->smallest ||
-			pos.y <= fillit_grid->smallest)
+	while (pos.x <= f_grid->smallest ||
+			pos.y <= f_grid->smallest)
 	{
 		pos.x = 1;
-		while (pos.x <= fillit_grid->smallest)
+		while (pos.x <= f_grid->smallest)
 		{
-			if (fillit_grid->pos[pos.y - 1][pos.x - 1] == letter)
-				fillit_grid->pos[pos.y - 1][pos.x - 1] = '.';
+			if (f_grid->pos[pos.y - 1][pos.x - 1] == letter)
+				f_grid->pos[pos.y - 1][pos.x - 1] = '.';
 			pos.x++;
 		}
 		pos.y++;
@@ -85,14 +85,14 @@ void	clear_piece(grid *fillit_grid, piece *tet_piece)
 
 void	fillit(slider *total)
 {
-	grid	*fillit_grid;
+	grid	*f_grid;
 	int		smallest;
 	coord	start;
 
 	start.x = 1;
 	start.y = 1;
 	smallest = smallest_square(total);
-	fillit_grid = grid_init(smallest);
-	fillit_grid = solve(fillit_grid, &start, total);
-	print_grid(fillit_grid);
+	f_grid = grid_init(smallest);
+	f_grid = solve(f_grid, &start, total);
+	print_grid(f_grid);
 }

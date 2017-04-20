@@ -21,11 +21,11 @@ grid	*grid_init(int size)
 {
 	int		i;
 	int		j;
-	grid	*fillit_grid;
+	grid	*f_grid;
 	char	**pos_array;
 
 	i = -1;
-	fillit_grid = (grid *)malloc(sizeof(grid));
+	f_grid = (grid *)malloc(sizeof(grid));
 	pos_array = (char **)malloc((sizeof(char *) * (size)));
 	while (i++ < size)
 		pos_array[i] = (char *)malloc(sizeof(char) * (size));
@@ -36,30 +36,30 @@ grid	*grid_init(int size)
 		while (j++ < size)
 			pos_array[i][j] = '.';
 	}
-	fillit_grid->flag = 1;
-	fillit_grid->pos = pos_array;
-	fillit_grid->smallest = size;
-	fillit_grid->last = coord_array_init(size);
-	return (fillit_grid);
+	f_grid->flag = 1;
+	f_grid->pos = pos_array;
+	f_grid->smallest = size;
+	f_grid->last = coord_array_init(size);
+	return (f_grid);
 }
 
-int		free_grid(grid *fillit_grid, int size)
+int		free_grid(grid *f_grid, int size)
 {
 	int smallest;
 	int i;
 
 	size = 0;
-	smallest = fillit_grid->smallest;
+	smallest = f_grid->smallest;
 	i = 0;
-	free(fillit_grid->last);
+	free(f_grid->last);
 	i = 0;
 	while (i < smallest)
 	{
-		free(fillit_grid->pos[i]);
+		free(f_grid->pos[i]);
 		i++;
 	}
-	free(fillit_grid->pos);
-	free(fillit_grid);
-	fillit_grid = NULL;
+	free(f_grid->pos);
+	free(f_grid);
+	f_grid = NULL;
 	return (smallest);
 }
