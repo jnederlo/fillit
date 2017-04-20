@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int	shape_1(piece *tetrimino)
+int	shape_1(t_piece *tetrimino)
 {
 	if ((tetrimino->pos[0].y == 1 && tetrimino->pos[0].x == 2) &&
 		(tetrimino->pos[1].y == 2 && tetrimino->pos[1].x == 1) &&
@@ -22,7 +22,7 @@ int	shape_1(piece *tetrimino)
 	return (0);
 }
 
-int	shape_2(piece *tetrimino)
+int	shape_2(t_piece *tetrimino)
 {
 	if ((tetrimino->pos[0].y == 1 && tetrimino->pos[0].x == 2) &&
 		(tetrimino->pos[1].y == 2 && tetrimino->pos[1].x == 1) &&
@@ -32,7 +32,7 @@ int	shape_2(piece *tetrimino)
 	return (0);
 }
 
-int	shape_3(piece *tetrimino)
+int	shape_3(t_piece *tetrimino)
 {
 	if ((tetrimino->pos[0].y == 1 && tetrimino->pos[0].x == 1) &&
 		(tetrimino->pos[1].y == 1 && tetrimino->pos[1].x == 2) &&
@@ -42,7 +42,7 @@ int	shape_3(piece *tetrimino)
 	return (0);
 }
 
-int	shape_4(piece *tetrimino)
+int	shape_4(t_piece *tetrimino)
 {
 	if ((tetrimino->pos[0].y == 1 && tetrimino->pos[0].x == 1) &&
 		(tetrimino->pos[1].y == 2 && tetrimino->pos[1].x == 1) &&
@@ -52,7 +52,7 @@ int	shape_4(piece *tetrimino)
 	return (0);
 }
 
-int	shape_5(piece *tetrimino)
+int	shape_5(t_piece *tetrimino)
 {
 	if ((tetrimino->pos[0].y == 1 && tetrimino->pos[0].x == 1) &&
 		(tetrimino->pos[1].y == 1 && tetrimino->pos[1].x == 2) &&

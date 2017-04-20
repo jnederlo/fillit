@@ -49,7 +49,7 @@ int	valid_chk(char *buf)
 	return (0);
 }
 
-int	in_contact(piece *tetrimino)
+int	in_contact(t_piece *tetrimino)
 {
 	if ((shape_1(tetrimino) == 1) || (shape_2(tetrimino) == 1) ||
 		(shape_3(tetrimino) == 1) || (shape_4(tetrimino) == 1) ||

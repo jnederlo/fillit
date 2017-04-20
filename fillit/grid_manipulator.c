@@ -12,20 +12,20 @@
 
 #include "fillit.h"
 
-int		smallest_square(slider *total)
+int		smallest_square(t_slider *total)
 {
 	return (g_smallest_square[total->size - 1]);
 }
 
-grid	*grid_init(int size)
+t_grid	*grid_init(int size)
 {
 	int		i;
 	int		j;
-	grid	*f_grid;
+	t_grid	*f_grid;
 	char	**pos_array;
 
 	i = -1;
-	f_grid = (grid *)malloc(sizeof(grid));
+	f_grid = (t_grid *)malloc(sizeof(t_grid));
 	pos_array = (char **)malloc((sizeof(char *) * (size)));
 	while (i++ < size)
 		pos_array[i] = (char *)malloc(sizeof(char) * (size));
@@ -43,7 +43,7 @@ grid	*grid_init(int size)
 	return (f_grid);
 }
 
-int		free_grid(grid *f_grid, int size)
+int		free_grid(t_grid *f_grid, int size)
 {
 	int smallest;
 	int i;

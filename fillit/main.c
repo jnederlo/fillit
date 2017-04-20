@@ -18,10 +18,10 @@
 
 int	main(int argc, char **argv)
 {
-	int		fd;
-	int		nb_newlines;
-	char	*buf;
-	slider	*total;
+	int			fd;
+	int			nb_newlines;
+	char		*buf;
+	t_slider	*total;
 
 	if (usage(argc) == -1)
 		return (0);

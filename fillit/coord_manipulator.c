@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_coord_manipulator.c                                :+:      :+:    :+:   */
+/*   coord_manipulator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ t_coord	*coord_init(int x, int y)
 	return (pos);
 }
 
-t_coord	*get_next_pos(t_coord *start, grid *f_grid)
+t_coord	*get_next_pos(t_coord *start, t_grid *f_grid)
 {
 	int		x;
 	int		y;
@@ -53,7 +53,7 @@ t_coord	*get_next_pos(t_coord *start, grid *f_grid)
 	return (pos);
 }
 
-t_coord	*get_next_coord(t_coord *start, grid *f_grid)
+t_coord	*get_next_coord(t_coord *start, t_grid *f_grid)
 {
 	t_coord *pos;
 

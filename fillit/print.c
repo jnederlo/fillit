@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-void	print_grid(grid *fillit_grid)
+void	print_grid(t_grid *fillit_grid)
 {
 	int i;
 	int j;

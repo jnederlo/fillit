@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-grid	*solve(grid *f_grid, t_coord *next, slider *total)
+t_grid	*solve(t_grid *f_grid, t_coord *next, t_slider *total)
 {
 	int	check;
 
@@ -41,7 +41,7 @@ grid	*solve(grid *f_grid, t_coord *next, slider *total)
 	return (f_grid);
 }
 
-t_coord	*solve_place(grid *f_grid, t_coord *next, slider *total)
+t_coord	*solve_place(t_grid *f_grid, t_coord *next, t_slider *total)
 {
 	f_grid = place(f_grid, next, total->p_array[total->index]);
 	f_grid->last[total->index].x = next->x;
@@ -51,7 +51,7 @@ t_coord	*solve_place(grid *f_grid, t_coord *next, slider *total)
 	return (next);
 }
 
-grid	*solve_n(grid *f_grid, slider *total)
+t_grid	*solve_n(t_grid *f_grid, t_slider *total)
 {
 	f_grid = grid_init(free_grid(f_grid, total->size) + 1);
 	total->index = 0;
@@ -59,7 +59,7 @@ grid	*solve_n(grid *f_grid, slider *total)
 	return (f_grid);
 }
 
-t_coord	*solve_clear(grid *f_grid, t_coord *next, slider *total)
+t_coord	*solve_clear(t_grid *f_grid, t_coord *next, t_slider *total)
 {
 	clear_piece(f_grid, total->p_array[total->index]);
 	next = &(f_grid->last[total->index]);

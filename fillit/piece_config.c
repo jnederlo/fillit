@@ -19,7 +19,7 @@
 
 #include "fillit.h"
 
-piece	*piece_init(piece *tetrimino)
+t_piece	*piece_init(t_piece *tetrimino)
 {
 	t_coord	xy;
 	int		i;
@@ -35,7 +35,7 @@ piece	*piece_init(piece *tetrimino)
 	return (tetrimino);
 }
 
-piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
+t_piece	*piece_set(t_piece *tetrimino, char *buf, int i, int j)
 {
 	int		column;
 	int		row;
@@ -64,7 +64,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 	return (tetrimino);
 }
 
-piece	*piece_min(piece *tetrimino)
+t_piece	*piece_min(t_piece *tetrimino)
 {
 	int	row;
 	int	i;

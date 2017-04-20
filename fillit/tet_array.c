@@ -17,19 +17,19 @@
 
 #include "fillit.h"
 
-slider	*tet_array(char *buf)
+t_slider	*tet_array(char *buf)
 {
-	slider			*total;
-	piece			**piece_array;
+	t_slider		*total;
+	t_piece			**piece_array;
 	int				i;
 
-	total = (slider *)malloc(sizeof(slider));
+	total = (t_slider *)malloc(sizeof(t_slider));
 	if (!total)
 		return (0);
 	total->size = count_pieces(buf);
 	if (total->size == -1)
 		return (NULL);
-	piece_array = (piece **)malloc(sizeof(piece *) * total->size);
+	piece_array = (t_piece **)malloc(sizeof(t_piece *) * total->size);
 	if (!piece_array)
 		return (0);
 	i = 0;
@@ -46,15 +46,15 @@ slider	*tet_array(char *buf)
 	return (total);
 }
 
-piece	*tet_piece(char *buf, char letter)
+t_piece		*tet_piece(char *buf, char letter)
 {
 	int		i;
 	int		j;
-	piece	*tetrimino;
+	t_piece	*tetrimino;
 
 	i = -1;
 	j = 0;
-	tetrimino = (piece *)malloc(sizeof(piece));
+	tetrimino = (t_piece *)malloc(sizeof(t_piece));
 	if (!tetrimino)
 		return (0);
 	tetrimino = piece_init(tetrimino);
@@ -65,7 +65,7 @@ piece	*tet_piece(char *buf, char letter)
 	return (tetrimino);
 }
 
-int		count_pieces(char *buf)
+int			count_pieces(char *buf)
 {
 	int count;
 	int error;

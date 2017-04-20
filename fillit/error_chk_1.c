@@ -79,7 +79,7 @@ int	newline(char *buf, int nb_newlines)
 	return (nb_newlines);
 }
 
-int	total_error(slider *total)
+int	total_error(t_slider *total)
 {
 	if (total == NULL)
 	{
