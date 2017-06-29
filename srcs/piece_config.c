@@ -17,11 +17,11 @@
 ** piece (in piece_min())
 */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-piece	*piece_init(piece *tetrimino)
+t_piece	*piece_init(t_piece *tetrimino)
 {
-	coord	xy;
+	t_coord	xy;
 	int		i;
 
 	i = 0;
@@ -35,21 +35,20 @@ piece	*piece_init(piece *tetrimino)
 	return (tetrimino);
 }
 
-piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
+t_piece	*piece_set(t_piece *tetrimino, char *buf, int i, int j)
 {
 	int		column;
 	int		row;
 
 	column = 1;
 	row = 1;
-	while (i < 19)
+	while (++i < 19)
 	{
 		if (buf[i] == '.')
 			column++;
 		else if (buf[i] == '#')
 		{
-			tetrimino->pos[j].x = column;
-			tetrimino->pos[j].y = row;
+			tetrimino->pos[j] = *coord_init(column, row);
 			j++;
 			column++;
 		}
@@ -58,7 +57,6 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 			column = 1;
 			row++;
 		}
-		i++;
 	}
 	tetrimino = piece_min(tetrimino);
 	if (in_contact(tetrimino) == -1)
@@ -66,7 +64,7 @@ piece	*piece_set(piece *tetrimino, char *buf, int i, int j)
 	return (tetrimino);
 }
 
-piece	*piece_min(piece *tetrimino)
+t_piece	*piece_min(t_piece *tetrimino)
 {
 	int	row;
 	int	i;
@@ -74,21 +72,18 @@ piece	*piece_min(piece *tetrimino)
 	row = 1;
 	i = 0;
 	while (row++ < tetrimino->pos[0].y)
-			i++;
+		i++;
 	tetrimino->pos[0].y = tetrimino->pos[0].y - i;
 	tetrimino->pos[1].y = tetrimino->pos[1].y - i;
 	tetrimino->pos[2].y = tetrimino->pos[2].y - i;
 	tetrimino->pos[3].y = tetrimino->pos[3].y - i;
-
 	while (tetrimino->pos[0].x > 1 && tetrimino->pos[1].x > 1
 		&& tetrimino->pos[2].x > 1 && tetrimino->pos[3].x > 1)
-		{
-			tetrimino->pos[0].x = tetrimino->pos[0].x - 1;
-			tetrimino->pos[1].x = tetrimino->pos[1].x - 1;
-			tetrimino->pos[2].x = tetrimino->pos[2].x - 1;
-			tetrimino->pos[3].x = tetrimino->pos[3].x - 1;
-		}
+	{
+		tetrimino->pos[0].x = tetrimino->pos[0].x - 1;
+		tetrimino->pos[1].x = tetrimino->pos[1].x - 1;
+		tetrimino->pos[2].x = tetrimino->pos[2].x - 1;
+		tetrimino->pos[3].x = tetrimino->pos[3].x - 1;
+	}
 	return (tetrimino);
 }
-
-

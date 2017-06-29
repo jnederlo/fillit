@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_file.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/22 19:16:51 by jnederlo          #+#    #+#             */
-/*   Updated: 2017/03/22 19:17:00 by jnederlo         ###   ########.fr       */
+/*   Created: 2017/03/23 13:39:59 by jnederlo          #+#    #+#             */
+/*   Updated: 2017/03/23 13:40:11 by jnederlo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-int	read_file(int fd, char *buf)
+void	print_grid(t_grid *fillit_grid)
 {
-	int	read_bytes;
-	read_bytes = read(fd, buf, BUF_SIZE);
-	return (read_bytes);
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < fillit_grid->smallest)
+	{
+		j = 0;
+		while (j < fillit_grid->smallest)
+		{
+			ft_putchar(fillit_grid->pos[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
 }

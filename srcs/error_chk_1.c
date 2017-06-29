@@ -20,9 +20,9 @@
 **					and that each file has a max of 26 tet and a min of 1.
 */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-int usage(int argc)
+int	usage(int argc)
 {
 	if (argc != 2)
 	{
@@ -42,17 +42,15 @@ int	error_chk(int error_val)
 	return (0);
 }
 
-int	buf_chk(char *buf)
+int	buf_chk(char *buf, int nb_newlines)
 {
 	int	pos;
-	int nb_newlines;
 	int row;
 
-	nb_newlines = 0;
 	while (*buf)
 	{
-		row = 1;
-		while (row < 5)
+		row = 0;
+		while (++row < 5)
 		{
 			pos = -1;
 			while (pos++ < 3)
@@ -61,16 +59,14 @@ int	buf_chk(char *buf)
 					return (-1);
 				buf++;
 			}
-			if (*buf == '\n' ? nb_newlines = newline(buf, nb_newlines) : 0);
-			else if (*buf)
+			nb_newlines = newline(buf, nb_newlines);
+			if (*buf != '\n' && *buf)
 				return (-1);
 			buf++;
-			row++;
 		}
 		nb_newlines = newline(buf, nb_newlines);
-		if (*buf == '\0')
-			return nb_newlines < 130 ? 1 : -1;
-		buf++;
+		if (*buf++ == '\0')
+			return (nb_newlines < 130 ? 1 : -1);
 	}
 	return (-1);
 }
@@ -80,4 +76,14 @@ int	newline(char *buf, int nb_newlines)
 	if (*buf == '\n')
 		nb_newlines++;
 	return (nb_newlines);
+}
+
+int	total_error(t_slider *total)
+{
+	if (total == NULL)
+	{
+		ft_putstr("error\n");
+		return (-1);
+	}
+	return (0);
 }

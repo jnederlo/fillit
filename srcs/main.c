@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_file.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jnederlo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+/*
+** BUF_SIZE is defined in the header as 1024.
+*/
 
-int	open_file(char *file)
+#include "../includes/fillit.h"
+
+int	main(int argc, char **argv)
 {
-	int	fd;
-	
-	fd = open(file, O_RDONLY);
-	return (fd);
+	int			fd;
+	int			nb_newlines;
+	char		*buf;
+	t_slider	*total;
+
+	if (usage(argc) == -1)
+		return (0);
+	fd = open_file(argv[1]);
+	if (error_chk(fd) == -1)
+		return (0);
+	buf = ft_strnew(BUF_SIZE);
+	if (error_chk(read_file(fd, buf)) == -1)
+		return (0);
+	nb_newlines = 0;
+	if (error_chk(buf_chk(buf, nb_newlines)) == -1)
+		return (0);
+	total = tet_array(buf);
+	if (total_error(total) == -1)
+		return (0);
+	free(buf);
+	fillit(total);
+	if (error_chk(close(fd)) == -1)
+		return (0);
+	return (0);
 }

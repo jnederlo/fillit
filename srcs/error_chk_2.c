@@ -15,12 +15,12 @@
 **
 **		- valid_chk() checks that each tet has precisely 4 blocks, and that
 **					each character is either a '#' or a '.'
-**		- in_contact() checks to make sure that each block of tets must be 
+**		- in_contact() checks to make sure that each block of tets must be
 **					in contact with at least 1 other block on each of
 **					it's 4 sides.
 */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
 int	valid_chk(char *buf)
 {
@@ -49,7 +49,7 @@ int	valid_chk(char *buf)
 	return (0);
 }
 
-int	in_contact(piece *tetrimino)
+int	in_contact(t_piece *tetrimino)
 {
 	if ((shape_1(tetrimino) == 1) || (shape_2(tetrimino) == 1) ||
 		(shape_3(tetrimino) == 1) || (shape_4(tetrimino) == 1) ||

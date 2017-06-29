@@ -15,57 +15,57 @@
 ** of strucs of pieces, and to count the number of pieces in the struct array.
 */
 
-#include "fillit.h"
+#include "../includes/fillit.h"
 
-slider	*tet_array(char *buf)
+t_slider	*tet_array(char *buf)
 {
-	slider			*total;
-	piece			**piece_array;
-	piece			**head;
-	int				size_array;
+	t_slider		*total;
+	t_piece			**piece_array;
+	int				i;
 
-	size_array = count_pieces(buf);
-	if (size_array == -1)
-		return (NULL);
-	total = (slider *)malloc(sizeof(slider));
+	total = (t_slider *)malloc(sizeof(t_slider));
 	if (!total)
 		return (0);
-	total->size = size_array;
-	piece_array = (piece **)malloc(sizeof(piece *) * size_array);
+	total->size = count_pieces(buf);
+	if (total->size == -1)
+		return (NULL);
+	piece_array = (t_piece **)malloc(sizeof(t_piece *) * total->size);
 	if (!piece_array)
 		return (0);
-	head = piece_array;
-	while (size_array--)
+	i = 0;
+	while (i < total->size)
 	{
-		*piece_array = tet_piece(buf);
-		if (*piece_array == 0)
+		piece_array[i] = tet_piece(buf, i + 65);
+		if (piece_array[i] == 0)
 			return (0);
-		piece_array++;
+		i++;
 		buf += 21;
 	}
-	total->piece_array = head;
+	total->p_array = piece_array;
+	total->index = 0;
 	return (total);
 }
 
-piece	*tet_piece(char *buf)
+t_piece		*tet_piece(char *buf, char letter)
 {
 	int		i;
 	int		j;
-	piece	*tetrimino;
+	t_piece	*tetrimino;
 
-	i = 0;
+	i = -1;
 	j = 0;
-	tetrimino = (piece *)malloc(sizeof(piece));
+	tetrimino = (t_piece *)malloc(sizeof(t_piece));
 	if (!tetrimino)
 		return (0);
 	tetrimino = piece_init(tetrimino);
 	tetrimino = piece_set(tetrimino, buf, i, j);
 	if (tetrimino == 0)
 		return (0);
+	tetrimino->letter = letter;
 	return (tetrimino);
 }
 
-int		count_pieces(char *buf)
+int			count_pieces(char *buf)
 {
 	int count;
 	int error;
@@ -76,11 +76,11 @@ int		count_pieces(char *buf)
 	{
 		if ((error = valid_chk(buf)) == -1)
 			return (-1);
-		buf += 19;
+		buf += 20;
 		if (*buf == '\n')
 		{
 			count++;
-			buf += 2;
+			buf += 1;
 		}
 		else if (*buf == '\0')
 		{
